@@ -12,13 +12,7 @@ void runGameInGameMode()
 	Window* win = new Window();
 	setupGLFWStuff();
 	win->displayWindow();	
-	float x = 0.0f;
-	while (!win->shouldClose()) {
-		x += 0.001f;
-		if (x >= 1)
-			x = 0;
-		win->clearWindow(x, 0, 1, 1);
-		win->swapBuffers();
-	}
+	GameLoop loop(win);
+	loop.startLoop();
 	glfwTerminate();
 }
