@@ -2,6 +2,7 @@
 #include "GameObject.h"
 #include "Window.h"
 #include "Batcher.h"
+#include "Shader.h"
 class GameLoop {
 public:
 	GameLoop(Window * window);
@@ -10,6 +11,6 @@ public:
 private:
 	Window* win;
 	Batcher* batcher;
+
 	void drawElements();
-	GameObject * gameObjects;
 };
