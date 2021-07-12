@@ -22,6 +22,12 @@
     <Filter Include="Source Files\GameEngine">
       <UniqueIdentifier>{52670487-8db0-45fa-9ae7-742959971a8b}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source Files\GameObjects">
+      <UniqueIdentifier>{f3ac53bb-b8e2-4012-bfad-f1fdfce7cee2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\GameObjects">
+      <UniqueIdentifier>{e3f12830-b570-41ad-aafc-501808116ffc}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <None Include="..\README.md" />
@@ -41,6 +47,9 @@
     </ClInclude>
     <ClInclude Include="Batcher.h">
       <Filter>Header Files\GameEngine</Filter>
+    </ClInclude>
+    <ClInclude Include="GameObject.h">
+      <Filter>Header Files\GameObjects</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

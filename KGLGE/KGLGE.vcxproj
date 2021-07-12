@@ -164,6 +164,7 @@
   <ItemGroup>
     <ClInclude Include="Batcher.h" />
     <ClInclude Include="GameLoop.h" />
+    <ClInclude Include="GameObject.h" />
     <ClInclude Include="Math.hpp" />
     <ClInclude Include="Time.hpp" />
     <ClInclude Include="Window.h" />

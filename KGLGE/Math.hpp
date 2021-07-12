@@ -5,7 +5,9 @@ namespace KGLGE {
 
 	struct Vector
 	{
+		//The magnitude (length) of the line
 		float magnitude;
+		//The angle, in Radians, of the line from the x axis
 		float direction;
 	};
 	struct Position
