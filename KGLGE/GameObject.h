@@ -14,13 +14,18 @@ namespace KGLGE {
 		/// Recalculates and returns an array of vertexes from the vectors provided
 		/// </summary>
 		/// <returns></returns>
-		virtual Vertex* getVertexAtPos() = 0;
-		bool shouldUpdate() {
+		virtual Vertex* getVertexAtPos(unsigned int pos) = 0;
+		/// <summary>
+		/// 
+		/// </summary>
+		/// <returns></returns>
+		bool shouldUpdateVertex() {
 			if (needsUpdate) {
 				needsUpdate = false;
 				return true;
 			}
 		}
+		virtual void update() = 0;
 		virtual unsigned int getNumVertex() = 0;
 		virtual unsigned int getSizeOfVertexs() = 0;
 	private:
