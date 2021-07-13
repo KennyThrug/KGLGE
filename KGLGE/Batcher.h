@@ -7,6 +7,7 @@
 /// 
 /// </summary>
 namespace KGLGE {
+	void TerminateProgram() { glfwTerminate(); }
 	class Batcher
 	{
 	public:
@@ -24,7 +25,7 @@ namespace KGLGE {
 		/// Resets count to begining
 		/// </summary>
 		void resetCount();
-		float* getValues;
+		float* getValues();
 	private:
 		float m_values[4000];
 		unsigned int m_pointer = 0;

@@ -160,12 +160,16 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <None Include="..\README.md" />
+    <None Include="FragmentShader.glsl" />
+    <None Include="VertexShader.glsl" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Batcher.h" />
     <ClInclude Include="GameLoop.h" />
     <ClInclude Include="GameObject.h" />
     <ClInclude Include="Math.hpp" />
+    <ClInclude Include="Runner.h" />
+    <ClInclude Include="ShaderProgram.h" />
     <ClInclude Include="Time.hpp" />
     <ClInclude Include="Window.h" />
   </ItemGroup>
@@ -173,6 +177,7 @@
     <ClCompile Include="Batcher.cpp" />
     <ClCompile Include="GameLoop.cpp" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="ShaderProgram.cpp" />
     <ClCompile Include="Window.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

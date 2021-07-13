@@ -11,7 +11,7 @@ namespace KGLGE {
 	class GameLoop
 	{
 	public:
-		GameLoop(Window* win) : m_Window(win) {}
+		GameLoop(Window* win) : p_Window(win) {}
 		void startLoop();
 		void loadLevel();
 		unsigned int addGameObject(GameObject* obj);
@@ -19,7 +19,7 @@ namespace KGLGE {
 		void removeGameObject(unsigned int index);
 	private:
 		void saveLevel();
-		Window* m_Window;
+		Window* p_Window;
 		unsigned char m_numGameObjects[3];
 		GameObject* gameObjects[3][32];
 	};
