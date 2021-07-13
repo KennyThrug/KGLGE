@@ -9,10 +9,15 @@ ShaderProgram::ShaderProgram(std::string VertexShaderFileName, std::string Fragm
 void ShaderProgram::init()
 {
 	float vertecies[] = {
-		-0.5f,0.5f,
-		0.5f,0.5f,
-		0.6f,-0.5f,
-		-0.5f,-0.5f
+		0,1,0,1,
+		1,1,1,1,
+		1,0,1,0,
+		0,0,0,0,
+
+		0,-1,0,1,
+		-1,-1,1,1,
+		-1,0,1,0,
+		0,0,0,0
 	};
 	glCreateVertexArrays(1, &m_VA);
 	glBindVertexArray(m_VA);
@@ -22,10 +27,17 @@ void ShaderProgram::init()
 	glBufferData(GL_ARRAY_BUFFER, sizeof(vertecies), vertecies, GL_STATIC_DRAW);
 
 	glEnableVertexArrayAttrib(m_VB, 0);
-	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(float),0);
+	glVertexAttribPointer(0, 2, GL_FLOAT, GL_FALSE, 4 * sizeof(float),0);
+
+	glEnableVertexArrayAttrib(m_VB, 1);
+	glVertexAttribPointer(1, 2, GL_FLOAT, GL_FALSE, 4 * sizeof(float), (const void*)(sizeof(float)*2));
 
 	unsigned int indicies[] = {
-		0,1,2,2,3,0
+		0,1,2,
+		2,3,0,
+
+		4,5,6,
+		6,7,4
 	};
 
 	glCreateBuffers(1, &m_IB);
@@ -38,7 +50,7 @@ void ShaderProgram::paintVerticies(float* verticies, unsigned int verteciesCount
 {
 	glUseProgram(program);
 	glBindVertexArray(m_VA);
-	glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, nullptr);
+	glDrawElements(GL_TRIANGLES, 12, GL_UNSIGNED_INT, nullptr);
 }
 
 void ShaderProgram::usePrograms(const std::string VertexShaderFileName, const std::string FragmentShaderFileName)
