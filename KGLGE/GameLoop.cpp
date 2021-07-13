@@ -1,8 +1,11 @@
 #include "GameLoop.h"
+#include "ShaderProgram.h"
 
 void KGLGE::GameLoop::startLoop()
 {
 	Batcher batcher;
+	ShaderProgram shader;
+	shader.init();
 	while (!p_Window->shouldClose()) {
 		//Clean up from old stuff
 		batcher.resetCount();
@@ -36,6 +39,7 @@ void KGLGE::GameLoop::startLoop()
 				}
 			}
 		}
+		shader.paintVerticies(NULL,1,NULL,2);
 
 		//Ending Loop Cleanup
 		p_Window->swapBuffers();

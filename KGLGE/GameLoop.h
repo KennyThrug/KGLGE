@@ -2,11 +2,12 @@
 #include "Window.h"
 #include "Batcher.h"
 #include "GameObject.h"
-struct Level {
-
-};
 
 namespace KGLGE {
+
+	struct Level {
+
+	};
 
 	class GameLoop
 	{

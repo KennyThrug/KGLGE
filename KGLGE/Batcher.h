@@ -7,7 +7,6 @@
 /// 
 /// </summary>
 namespace KGLGE {
-	void TerminateProgram() { glfwTerminate(); }
 	class Batcher
 	{
 	public:

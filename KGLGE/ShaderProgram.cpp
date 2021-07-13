@@ -36,7 +36,9 @@ void ShaderProgram::init()
 
 void ShaderProgram::paintVerticies(float* verticies, unsigned int verteciesCount, unsigned int* indicies, unsigned int indiciesCount)
 {
-
+	glUseProgram(program);
+	glBindVertexArray(m_VA);
+	glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, nullptr);
 }
 
 void ShaderProgram::usePrograms(const std::string VertexShaderFileName, const std::string FragmentShaderFileName)

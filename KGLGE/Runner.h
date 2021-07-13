@@ -10,5 +10,5 @@ void runProgram() {
 	win.display();
 	KGLGE::GameLoop loop(&win);
 	loop.startLoop();
-	KGLGE::TerminateProgram();
+	glfwTerminate();
 }
