@@ -1,11 +1,19 @@
 #include "GameLoop.h"
 #include "ShaderProgram.h"
 
+#ifndef STB_IMAGE_IMPLEMENTATION
+#define STB_IMAGE_IMPLEMENTATION
+#include <STB_IMAGE/stb_image.h>
+#endif // !STB_IMAGE_IMPLEMENTATION
+
+
 void KGLGE::GameLoop::startLoop()
 {
 	Batcher batcher;
 	ShaderProgram shader;
 	shader.init();
+	loadTexture("res/sprites/Untitled.jpg");
+
 	while (!p_Window->shouldClose()) {
 		//Clean up from old stuff
 		batcher.resetCount();
@@ -46,4 +54,22 @@ void KGLGE::GameLoop::startLoop()
 
 	}
 	return;
+}
+
+GLuint KGLGE::GameLoop::loadTexture(const std::string& fileName)
+{
+	int w, h, bits;
+	auto* pixels = stbi_load(fileName.c_str(), &w, &h, &bits, STBI_rgb_alpha);
+	GLuint textureID;
+	glCreateTextures(GL_TEXTURE_2D, 1, &textureID);
+	glBindTexture(GL_TEXTURE_2D, textureID);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE);
+	glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA8, w, h, 0, GL_RGBA, GL_UNSIGNED_BYTE, pixels);
+
+	stbi_image_free(pixels);
+
+	return textureID;
 }

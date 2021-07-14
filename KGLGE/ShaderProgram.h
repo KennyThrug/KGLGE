@@ -9,7 +9,7 @@
 class ShaderProgram
 {
 public:
-	ShaderProgram(std::string VertexShaderFileName = "", std::string FragmentShaderFileName = "");
+	ShaderProgram(std::string VertexShaderFileName = "VertexShader.glsl", std::string FragmentShaderFileName = "FragmentShader.glsl");
 	void init();
 	/// <summary>
 	/// Paints the verticies given

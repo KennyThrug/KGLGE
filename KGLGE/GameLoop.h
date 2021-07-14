@@ -19,6 +19,7 @@ namespace KGLGE {
 		unsigned int setGameObject(GameObject* obj, unsigned int index);
 		void removeGameObject(unsigned int index);
 	private:
+		GLuint loadTexture(const std::string& fileName);
 		void saveLevel();
 		Window* p_Window;
 		unsigned char m_numGameObjects[3];

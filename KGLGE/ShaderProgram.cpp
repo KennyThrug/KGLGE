@@ -30,7 +30,7 @@ void ShaderProgram::init()
 	glVertexAttribPointer(0, 2, GL_FLOAT, GL_FALSE, 4 * sizeof(float),0);
 
 	glEnableVertexArrayAttrib(m_VB, 1);
-	glVertexAttribPointer(1, 2, GL_FLOAT, GL_FALSE, 4 * sizeof(float), (const void*)(sizeof(float)*2));
+	glVertexAttribPointer(1, 2, GL_FLOAT, GL_FALSE, 4 * sizeof(float), (const void*)(8));
 
 	unsigned int indicies[] = {
 		0,1,2,
