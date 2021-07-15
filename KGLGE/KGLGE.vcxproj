@@ -170,6 +170,7 @@
     <ClInclude Include="Math.hpp" />
     <ClInclude Include="Runner.h" />
     <ClInclude Include="ShaderProgram.h" />
+    <ClInclude Include="TextureAtlas.h" />
     <ClInclude Include="Time.hpp" />
     <ClInclude Include="Window.h" />
   </ItemGroup>
@@ -178,6 +179,7 @@
     <ClCompile Include="GameLoop.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="ShaderProgram.cpp" />
+    <ClCompile Include="TextureAtlas.cpp" />
     <ClCompile Include="Window.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
