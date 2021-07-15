@@ -9,15 +9,15 @@ ShaderProgram::ShaderProgram(std::string VertexShaderFileName, std::string Fragm
 void ShaderProgram::init()
 {
 	float vertecies[] = {
-		0,1,0,0.50008268562923763849842897304448f,
-		1,1,0.57142857142857142857142857142857f,1,
-		1,0,0.57142857142857142857142857142857f,0,
-		0,0,0,0,
+		0,1,0,1,1,
+		1,1,1,1,1,
+		1,0,1,0,1,
+		0,0,0,0,1,
 
-		0,-1,0.57142857142857142857142857142857f,1,
-		-1,-1,1,1,
-		-1,0,1,0.50008268562923763849842897304448f,
-		0,0,0.57142857142857142857142857142857f,0.50008268562923763849842897304448f
+		0,-1,0,1,0,
+		-1,-1,1,1,0,
+		-1,0,1,0,0,
+		0,0,0,0,0
 	};
 	glCreateVertexArrays(1, &m_VA);
 	glBindVertexArray(m_VA);
@@ -27,10 +27,13 @@ void ShaderProgram::init()
 	glBufferData(GL_ARRAY_BUFFER, sizeof(vertecies), vertecies, GL_STATIC_DRAW);
 
 	glEnableVertexArrayAttrib(m_VB, 0);
-	glVertexAttribPointer(0, 2, GL_FLOAT, GL_FALSE, 4 * sizeof(float),0);
+	glVertexAttribPointer(0, 2, GL_FLOAT, GL_FALSE, 5 * sizeof(float),0);
 
 	glEnableVertexArrayAttrib(m_VB, 1);
-	glVertexAttribPointer(1, 2, GL_FLOAT, GL_FALSE, 4 * sizeof(float), (const void*)(8));
+	glVertexAttribPointer(1, 2, GL_FLOAT, GL_FALSE, 5 * sizeof(float), (const void*)(8));
+
+	glEnableVertexArrayAttrib(m_VB, 2);
+	glVertexAttribPointer(2, 1, GL_FLOAT, GL_FALSE, 5 * sizeof(float), (const void*)(16));
 
 	unsigned int indicies[] = {
 		0,1,2,

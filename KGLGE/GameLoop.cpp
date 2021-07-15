@@ -11,22 +11,21 @@ void KGLGE::GameLoop::startLoop()
 	shader.init();
 	TextureAtlas atlas;
 
-	GLint baseImageLoc = glGetUniformLocation(shader.getProg(), "u_Texture");
-	GLint normalMapLoc = glGetUniformLocation(shader.getProg(), "u_Other");
-
-	glUniform1i(baseImageLoc, 0);
-	glUniform1i(normalMapLoc, 2);
-
 	glUseProgram(shader.getProg());
 
-	//atlas.addTextureToCache(2);
-	//atlas.addTextureToCache(3);
-	//atlas.createTextureAtlas("res/SpriteIndex.txt");
-	//loadTexture("res/texture-atlas-generator/textureAtlas.png");
+	GLint ImageLoc = glGetUniformLocation(shader.getProg(), "u_Texture");
+
+	int texID[8] = { 0,1,2,3,4,5,6,7 };
+
+	glUniform1iv(ImageLoc,8, texID);
+
+
 	GLuint ad = loadTexture("res/sprites/Nora.png",0);
 
-	GLuint ac = loadTexture("res/sprites/Steeler.png",2);
+	GLuint ac = loadTexture("res/sprites/Steeler.png",1);
 	
+	
+
 	while (!p_Window->shouldClose()) {
 		//Clean up from old stuff
 		batcher.resetCount();
