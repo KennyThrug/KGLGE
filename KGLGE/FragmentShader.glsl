@@ -3,15 +3,15 @@
 layout(location=0) out vec4 color;
 
 in vec2 v_TexCoord;
-uniform vec4 u_Color;
-uniform sampler2D u_Texture;
-uniform bool u_HasTex;
+in float v_texID;
+
+uniform sampler2D u_Texture[8];
 
 void main()
 {
-	color = u_Color;
-	if(u_HasTex){
-		vec4 texColor = texture(u_Texture, v_TexCoord);
-		color = texColor;
-	}
+	int index = int(v_texID);
+	vec4 texColor = texture(u_Texture[index], v_TexCoord);
+	//vec4 texColor = texture(u_Other,v_TexCoord);
+	//color = vec4(0,0,v_texID,1);
+	color = texColor;
 }

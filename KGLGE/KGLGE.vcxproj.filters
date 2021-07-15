@@ -13,82 +13,86 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
+    <Filter Include="Header Files\Helpers">
+      <UniqueIdentifier>{a7813f2f-2e7a-4692-bc83-a7ef69d83861}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\GameEngine">
+      <UniqueIdentifier>{d355ee83-2d55-4949-bf4e-e927cda9ed78}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\GameEngine">
+      <UniqueIdentifier>{52670487-8db0-45fa-9ae7-742959971a8b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\GameObjects">
+      <UniqueIdentifier>{f3ac53bb-b8e2-4012-bfad-f1fdfce7cee2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\GameObjects">
+      <UniqueIdentifier>{e3f12830-b570-41ad-aafc-501808116ffc}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Shaders">
+      <UniqueIdentifier>{17c5fd89-91b1-45a3-8683-7a4d5373ffb3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Shaders">
+      <UniqueIdentifier>{e9c2a51e-af8d-4b95-9fd3-5122b25245cf}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Window.h">
-      <Filter>Header Files</Filter>
+    <None Include="..\README.md" />
+    <None Include="VertexShader.glsl">
+      <Filter>Source Files\Shaders</Filter>
+    </None>
+    <None Include="FragmentShader.glsl">
+      <Filter>Source Files\Shaders</Filter>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="Time.hpp">
+      <Filter>Header Files\Helpers</Filter>
     </ClInclude>
     <ClInclude Include="GameLoop.h">
-      <Filter>Header Files</Filter>
+      <Filter>Header Files\GameEngine</Filter>
     </ClInclude>
-    <ClInclude Include="Shader.h">
-      <Filter>Header Files</Filter>
+    <ClInclude Include="Window.h">
+      <Filter>Header Files\GameEngine</Filter>
     </ClInclude>
     <ClInclude Include="Batcher.h">
-      <Filter>Header Files</Filter>
+      <Filter>Header Files\GameEngine</Filter>
     </ClInclude>
     <ClInclude Include="GameObject.h">
-      <Filter>Header Files</Filter>
+      <Filter>Header Files\GameObjects</Filter>
     </ClInclude>
-    <ClInclude Include="TextureAtlas.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Texture.h">
-      <Filter>Header Files</Filter>
+    <ClInclude Include="ShaderProgram.h">
+      <Filter>Header Files\Shaders</Filter>
     </ClInclude>
     <ClInclude Include="Runner.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="VertexBuffer.h">
-      <Filter>Header Files</Filter>
+    <ClInclude Include="Math.hpp">
+      <Filter>Header Files\Shaders</Filter>
     </ClInclude>
-    <ClInclude Include="IndexBuffer.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="BufferLayout.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="VertexArray.h">
-      <Filter>Header Files</Filter>
+    <ClInclude Include="TextureAtlas.h">
+      <Filter>Header Files\Shaders</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <None Include="FragmentShader.glsl" />
-    <None Include="VertexShader.glsl" />
-    <None Include="..\README.md" />
-  </ItemGroup>
-  <ItemGroup>
-    <ClCompile Include="Shader.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Window.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="GameObject.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Batcher.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="main.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Runner.cpp">
-      <Filter>Source Files</Filter>
+    <ClCompile Include="Batcher.cpp">
+      <Filter>Source Files\GameEngine</Filter>
     </ClCompile>
     <ClCompile Include="GameLoop.cpp">
-      <Filter>Source Files</Filter>
+      <Filter>Source Files\GameEngine</Filter>
     </ClCompile>
-    <ClCompile Include="VertexBuffer.cpp">
-      <Filter>Source Files</Filter>
+    <ClCompile Include="Window.cpp">
+      <Filter>Source Files\GameEngine</Filter>
     </ClCompile>
-    <ClCompile Include="IndexBuffer.cpp">
-      <Filter>Source Files</Filter>
+    <ClCompile Include="ShaderProgram.cpp">
+      <Filter>Source Files\Shaders</Filter>
     </ClCompile>
-    <ClCompile Include="VertexArray.cpp">
-      <Filter>Source Files</Filter>
+    <ClCompile Include="TextureAtlas.cpp">
+      <Filter>Source Files\Shaders</Filter>
     </ClCompile>
-    <ClCompile Include="BufferLayout.cpp">
+    <ClCompile Include="Test.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

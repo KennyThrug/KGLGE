@@ -1,34 +1,33 @@
 #pragma once
-#include <array>
+#include "Math.hpp"
 #include "GameObject.h"
-struct Positions {
-	float x;
-	float y;
-	float z;
-};
-struct TexCoords {
-	float x;
-	float y;
-};
-struct Vertex {
-	Positions positions;
-	TexCoords texCoords;
-};
+/// <summary>
+/// Solid state machine where using addToBatcher edits wherever the pointer is currently pointed to
+/// countingVar determines where the pointer is
+/// 
+/// </summary>
+namespace KGLGE {
+	class Batcher
+	{
+	public:
+		/// <summary>
+		/// Adds an object to the batcher, and then adds to the count the number of elements
+		/// </summary>
+		/// <param name="pos">The Position to be added</param>
+		void addToBatcher(Vertex pos);
+		/// <summary>
+		/// Increases the count by count, used to pass by objects and not edit them
+		/// </summary>
+		/// <param name="count"></param>
+		void addByCount(int count);
+		/// <summary>
+		/// Resets count to begining
+		/// </summary>
+		void resetCount();
+		float* getValues();
+	private:
+		float m_values[4000];
+		unsigned int m_pointer = 0;
+	};
+}
 
-class Batcher {
-public:
-	Vertex* getVertexes();
-	Vertex * getVertexAtIndex(unsigned int index);
-	unsigned int* getIndicies();
-	unsigned int getNumIndicies();
-	unsigned int* getIndiciesAtIndex(unsigned int index);
-	unsigned int getNumElements();
-	void addGameObject(GameObject* gameObject);
-	void editGameObject(GameObject* gameObject, int index);
-private:
-	unsigned int * indicies;
-	unsigned int numElements;
-	Vertex verticies[1000];
-
-	void reCheckVerticies();
-};

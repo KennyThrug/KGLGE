@@ -1,33 +1,20 @@
 #include "Batcher.h"
 
-Vertex* Batcher::getVertexes()
+void KGLGE::Batcher::addToBatcher(Vertex pos)
 {
-	return verticies;
+	m_values[m_pointer] = pos.position.x;
+	m_values[m_pointer + 1] = pos.position.y;
+	m_values[m_pointer + 2] = pos.texPos.x;
+	m_values[m_pointer + 3] = pos.texPos.y;
+	m_pointer+=4;
 }
 
-unsigned int* Batcher::getIndicies()
+void KGLGE::Batcher::addByCount(int count)
 {
-	unsigned int a[] = {
-		0, 1, 2,
-		2, 3, 0
-	};
-	return a;
+	m_pointer += count;
 }
 
-unsigned int Batcher::getNumIndicies()
+void KGLGE::Batcher::resetCount()
 {
-	return 6;
-}
-
-unsigned int Batcher::getNumElements()
-{
-	return 4;
-}
-
-void Batcher::addGameObject(GameObject* gameObject)
-{
-	verticies[0] = { {0.0f,0.0f,0.0f},{0.0f,0.0f} };
-	verticies[1] = { {0.0f,0.5f,0.0f},{0.0f,1.0f} };
-	verticies[2] = { {0.5f,0.5f,0.0f},{1.0f,1.0f} };
-	verticies[3] = { {0.5f,0.0f,0.0f},{1.0f,0.0f} };
+	m_pointer = 0;
 }
