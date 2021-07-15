@@ -19,6 +19,7 @@ public:
 	/// <param name="indicies">Indicies for the vertex</param>
 	/// <param name="indiciesCount">The number of indicies in the indicies array</param>
 	void paintVerticies(float* verticies, unsigned int verteciesCount, unsigned int* indicies, unsigned int indiciesCount);
+	unsigned int getProg() { return program; }
 private:
 	unsigned int program;
 	unsigned int m_VA;

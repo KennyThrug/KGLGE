@@ -16,11 +16,11 @@ namespace KGLGE {
 	public:
 		GameLoop(Window* win) : p_Window(win) {}
 		void startLoop();
-		void loadLevel();
 		unsigned int addGameObject(GameObject* obj);
 		unsigned int setGameObject(GameObject* obj, unsigned int index);
 		void removeGameObject(unsigned int index);
 	private:
+		GLuint loadTexture(const std::string& fileName, unsigned char textureSlot);
 		void saveLevel();
 		Window* p_Window;
 		unsigned char m_numGameObjects[3];

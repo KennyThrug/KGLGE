@@ -179,6 +179,7 @@
     <ClCompile Include="GameLoop.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="ShaderProgram.cpp" />
+    <ClCompile Include="Test.cpp" />
     <ClCompile Include="TextureAtlas.cpp" />
     <ClCompile Include="Window.cpp" />
   </ItemGroup>
