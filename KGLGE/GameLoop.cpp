@@ -11,14 +11,6 @@ void KGLGE::GameLoop::startLoop()
 	shader.init();
 	TextureAtlas atlas;
 
-	glUseProgram(shader.getProg());
-
-	GLint ImageLoc = glGetUniformLocation(shader.getProg(), "u_Texture");
-
-	int texID[8] = { 0,1,2,3,4,5,6,7 };
-
-	glUniform1iv(ImageLoc,8, texID);
-
 
 	GLuint ad = loadTexture("res/sprites/Nora.png",0);
 

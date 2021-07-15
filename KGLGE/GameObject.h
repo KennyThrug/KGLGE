@@ -4,6 +4,7 @@ namespace KGLGE {
 	struct Vertex {
 		Position position;
 		Position texPos;
+		float texID;
 	};
 	class GameObject
 	{
