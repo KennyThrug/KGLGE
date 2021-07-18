@@ -1,9 +1,10 @@
 #pragma once
 #include "Window.h"
 #include "Batcher.h"
-#include "GameObject.h"
 #include "ShaderProgram.h"
 #include "TextureAtlas.h"
+#include "DummyGO.h"
+#include "DummyTwo.h"
 
 namespace KGLGE {
 

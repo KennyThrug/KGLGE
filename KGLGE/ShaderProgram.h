@@ -23,7 +23,8 @@ namespace KGLGE {
 		/// <param name="verteciesCount">the number of floats in the verticies array</param>
 		/// <param name="indicies">Indicies for the vertex</param>
 		/// <param name="indiciesCount">The number of indicies in the indicies array</param>
-		void paintVerticies(float* verticies, unsigned int verteciesCount, unsigned int* indicies, unsigned int indiciesCount);
+		void paintVerticies(unsigned int indiciesCount);
+		void setVerticies(Vertex* verticies, unsigned int lengthOfVertecies, unsigned int offsetOfVerticies, Triangle* indicies, unsigned int lengthOfIndicies, unsigned int offsetOfIndicies);
 		void setupSamplers();
 	private:
 		unsigned int program;

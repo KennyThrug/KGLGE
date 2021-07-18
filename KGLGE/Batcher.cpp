@@ -1,20 +1,9 @@
 #include "Batcher.h"
 
-void KGLGE::Batcher::addToBatcher(Vertex pos)
+void KGLGE::Batcher::setValues(KGLGE::Vertex* verticies, unsigned int numVerticies, KGLGE::Triangle* indicies, unsigned int numTriangles)
 {
-	m_values[m_pointer] = pos.position.x;
-	m_values[m_pointer + 1] = pos.position.y;
-	m_values[m_pointer + 2] = pos.texPos.x;
-	m_values[m_pointer + 3] = pos.texPos.y;
-	m_pointer+=4;
+	p_Shader->setVerticies(verticies,numVerticies,m_Vertex_pointer,indicies,numTriangles,m_Index_pointer);
 }
-
-void KGLGE::Batcher::addByCount(int count)
-{
-	m_pointer += count;
-}
-
-void KGLGE::Batcher::resetCount()
-{
-	m_pointer = 0;
+void KGLGE::Batcher::paint() {
+	p_Shader->paintVerticies(7);
 }

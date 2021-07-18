@@ -8,35 +8,14 @@ KGLGE::ShaderProgram::ShaderProgram(std::string VertexShaderFileName, std::strin
 
 void KGLGE::ShaderProgram::init()
 {
-	float vertecies[] = {
-		0,1,0,1,1,
-		1,1,1,1,1,
-		1,0,1,0,1,
-		0,0,0,0,1,
-
-		0,-1,0,1,0,
-		-1,-1,1,1,0,
-		-1,0,1,0,0,
-		0,0,0,0,0
-	};
-	KGLGE::Vertex vert[8];
-	for (int i = 0; i < 8; i++) {
-		int te = i * 5;
-		vert[i] = {
-			vertecies[te],
-			vertecies[te + 1],
-			vertecies[te + 2],
-			vertecies[te + 3],
-			vertecies[te + 4]
-		};
-	}
+	KGLGE::Vertex vert[2000];
 
 	glCreateVertexArrays(1, &m_VA);
 	glBindVertexArray(m_VA);
 
 	glCreateBuffers(1, &m_VB);
 	glBindBuffer(GL_ARRAY_BUFFER,m_VB);
-	glBufferData(GL_ARRAY_BUFFER, sizeof(vert), vert, GL_STATIC_DRAW);
+	glBufferData(GL_ARRAY_BUFFER, sizeof(vert), vert, GL_DYNAMIC_DRAW);
 
 	glEnableVertexArrayAttrib(m_VB, 0);
 	glVertexAttribPointer(0, 2, GL_FLOAT, GL_FALSE, sizeof(KGLGE::Vertex),0);
@@ -47,27 +26,29 @@ void KGLGE::ShaderProgram::init()
 	glEnableVertexArrayAttrib(m_VB, 2);
 	glVertexAttribPointer(2, 1, GL_FLOAT, GL_FALSE, sizeof(KGLGE::Vertex), (const void*)(offsetof(KGLGE::Vertex,texID)));
 
-	unsigned int indicies[] = {
-		0,1,2,
-		2,3,0,
-
-		4,5,6,
-		6,7,4
-	};
 
 	glCreateBuffers(1, &m_IB);
 	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, m_IB);
-	glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(indicies), indicies, GL_STATIC_DRAW);
+	glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(unsigned int) * 1500, NULL, GL_DYNAMIC_DRAW);
 
 	setupSamplers();
 
 }
 
-void KGLGE::ShaderProgram::paintVerticies(float* verticies, unsigned int verteciesCount, unsigned int* indicies, unsigned int indiciesCount)
+void KGLGE::ShaderProgram::paintVerticies(unsigned int indiciesCount)
 {
 	glUseProgram(program);
 	glBindVertexArray(m_VA);
-	glDrawElements(GL_TRIANGLES, 12, GL_UNSIGNED_INT, nullptr);
+	glDrawElements(GL_TRIANGLES, indiciesCount * sizeof(unsigned int), GL_UNSIGNED_INT, nullptr);
+}
+
+void KGLGE::ShaderProgram::setVerticies(KGLGE::Vertex* verticies, unsigned int lengthOfVertecies, unsigned int offsetOfVerticies, Triangle* indicies, unsigned int lengthOfIndicies, unsigned int offsetOfIndicies)
+{
+	glBindBuffer(GL_ARRAY_BUFFER, m_VB);
+	glBufferSubData(GL_ARRAY_BUFFER, offsetOfVerticies * sizeof(Vertex), sizeof(Vertex) * lengthOfVertecies, verticies);
+
+	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, m_IB);
+	glBufferSubData(GL_ELEMENT_ARRAY_BUFFER, offsetOfIndicies * sizeof(Triangle), sizeof(Triangle) * lengthOfIndicies, indicies);
 }
 
 void KGLGE::ShaderProgram::setupSamplers()

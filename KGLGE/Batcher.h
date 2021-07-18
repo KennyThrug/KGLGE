@@ -1,6 +1,7 @@
 #pragma once
 #include "Math.hpp"
 #include "GameObject.h"
+#include "ShaderProgram.h"
 /// <summary>
 /// Solid state machine where using addToBatcher edits wherever the pointer is currently pointed to
 /// countingVar determines where the pointer is
@@ -13,24 +14,19 @@ namespace KGLGE {
 	class Batcher
 	{
 	public:
-		/// <summary>
-		/// Adds an object to the batcher, and then adds to the count the number of elements
-		/// </summary>
-		/// <param name="pos">The Position to be added</param>
-		void addToBatcher(Vertex pos);
-		/// <summary>
-		/// Increases the count by count, used to pass by objects and not edit them
-		/// </summary>
-		/// <param name="count"></param>
-		void addByCount(int count);
-		/// <summary>
-		/// Resets count to begining
-		/// </summary>
-		void resetCount();
-		float* getValues();
+		Batcher(ShaderProgram* shader) : p_Shader(shader){}
+		void increaseCounter(unsigned int count) { m_Vertex_pointer += count; }
+		void increaseIndex(unsigned int count) { m_Index_pointer += count; }
+		void resetCounters() { m_Vertex_pointer = 0; m_Index_pointer = 0; }
+		void paint();		
+		void setValues(Vertex* verticies, unsigned int numVerticies,Triangle* indicies, unsigned int numTriangles);
+
+		unsigned int getVertexPointer() { return m_Vertex_pointer; };
+		unsigned int getIndexPointer() { return m_Index_pointer; };
 	private:
-		float m_values[4000];
-		unsigned int m_pointer = 0;
+		ShaderProgram* p_Shader;
+		unsigned int m_Vertex_pointer = 0;
+		unsigned int m_Index_pointer = 0;
 	};
 }
 
