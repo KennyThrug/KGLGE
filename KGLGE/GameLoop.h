@@ -5,6 +5,7 @@
 #include "TextureAtlas.h"
 #include "DummyGO.h"
 #include "DummyTwo.h"
+#include "Time.hpp"
 
 namespace KGLGE {
 
@@ -40,13 +41,6 @@ namespace KGLGE {
 		/// <param name="index"></param>
 		void removeGameObject(unsigned int index);
 	private:
-		/// <summary>
-		/// Loads a texture, and sets it to a Sampler slot
-		/// </summary>
-		/// <param name="fileName"></param>
-		/// <param name="textureSlot"></param>
-		/// <returns></returns>
-		GLuint loadTexture(const std::string& fileName, unsigned char textureSlot);
 		void saveLevel();
 		Window* p_Window;
 		unsigned char m_numGameObjects[3];

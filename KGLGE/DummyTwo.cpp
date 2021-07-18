@@ -2,14 +2,15 @@
 
 bool KGLGE::DummyTwo::update()
 {
+    
     return true;
 }
 
 KGLGE::Vertex* KGLGE::DummyTwo::getVertexes()
 {
-    vert[0] = { {0,0},{0,1},3 };
-    vert[1] = { {1,0},{1,1},3 };
-    vert[2] = { {1,-1},{1,0},3 };
+    vert[0] = { {0,0},{0,0.500083f}, 3};
+    vert[1] = { {1,0},{0.5f,0.500083f},3 };
+    vert[2] = { {1,-1},{0.5f,0},3 };
     vert[3] = { {0,-1},{0,0},3 };
     return vert;
 }

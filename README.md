@@ -6,5 +6,6 @@ Dependencies:
 * GLFW
 * GLEW
 * STB_IMAGE
+* nlohmann/json
 
 Usage:
