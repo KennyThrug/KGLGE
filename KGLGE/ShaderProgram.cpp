@@ -39,7 +39,7 @@ void KGLGE::ShaderProgram::paintVerticies(unsigned int indiciesCount)
 {
 	glUseProgram(program);
 	glBindVertexArray(m_VA);
-	glDrawElements(GL_TRIANGLES, indiciesCount * sizeof(unsigned int), GL_UNSIGNED_INT, nullptr);
+	glDrawElements(GL_TRIANGLES, indiciesCount * 3, GL_UNSIGNED_INT, nullptr);
 }
 
 void KGLGE::ShaderProgram::setVerticies(KGLGE::Vertex* verticies, unsigned int lengthOfVertecies, unsigned int offsetOfVerticies, Triangle* indicies, unsigned int lengthOfIndicies, unsigned int offsetOfIndicies)

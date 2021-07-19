@@ -2,27 +2,9 @@
 
 void KGLGE::GameLoop::startLoop()
 {
-	ShaderProgram shader;
-	shader.init();
-	TextureAtlas atlas("res/sprites/cats/",3);
+	//TextureAtlas atlas("res/sprites/cats/",3);
 
 	Batcher batcher(&shader);
-
-	/*GLuint ad = loadTexture("res/sprites/Nora.png", 0);
-
-	GLuint ac = loadTexture("res/sprites/Steeler.png",1);
-
-	GLuint ap = loadTexture("res/sprites/Hilda.png",2);
-	
-	GLuint aq = loadTexture("res/sprites/rowlett.png",3);*/
-	
-	DummyGO dum;
-	addGameObject(&dum,1);
-
-	DummyTwo dummy;
-	addGameObject(&dummy,1);
-
-	addKeyHandler(1, 0, GLFW_KEY_W);
 
 	while (!p_Window->shouldClose()) {
 		//Clean up from old stuff
@@ -47,8 +29,9 @@ void KGLGE::GameLoop::startLoop()
 			for (int j = 0; j < 32 || numGameObjectsLeft != 0; j++) {
 				if (gameObjects[i][j] != nullptr) {
 					//Updates
-					if (gameObjects[i][j]->update()) {
+					if (gameObjects[i][j]->shouldUpdate) {
 						//Set Rendering
+						gameObjects[i][j]->shouldUpdate = false;
 						batcher.setValues(gameObjects[i][j]->getVertexes(), gameObjects[i][j]->getNumVertex(), gameObjects[i][j]->getIndicies(batcher.getVertexPointer()), gameObjects[i][j]->getNumTriangles());
 					}
 					batcher.increaseCounter(gameObjects[i][j]->getNumVertex());

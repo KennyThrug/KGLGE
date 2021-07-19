@@ -5,5 +5,5 @@ void KGLGE::Batcher::setValues(KGLGE::Vertex* verticies, unsigned int numVertici
 	p_Shader->setVerticies(verticies,numVerticies,m_Vertex_pointer,indicies,numTriangles,m_Index_pointer);
 }
 void KGLGE::Batcher::paint() {
-	p_Shader->paintVerticies(7);
+	p_Shader->paintVerticies(m_Index_pointer);
 }

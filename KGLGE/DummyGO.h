@@ -3,7 +3,7 @@
 namespace KGLGE {
 	class DummyGO : public GameObject {
 	public:
-		bool update() override;
+		void update() override;
 		Vertex* getVertexes() override;
 		unsigned int getNumVertex() override;
 		Triangle* getIndicies(unsigned int offset) override;

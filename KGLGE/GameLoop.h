@@ -21,7 +21,7 @@ namespace KGLGE {
 	class GameLoop
 	{
 	public:
-		GameLoop(Window* win) : p_Window(win) {}
+		GameLoop(Window* win) : p_Window(win) { shader.init(); }
 		/// <summary>
 		/// Starts the loop and runs it until Window.shouldClose() returns false 
 		/// at this point you will lose control and everything will most likely need to happen in a GameObject's update loop
@@ -53,6 +53,7 @@ namespace KGLGE {
 		unsigned char m_numGameObjects[3];
 		std::vector<KeyHandler> handlers;
 		GameObject* gameObjects[3][32];
+		ShaderProgram shader;
 	};
 
 }

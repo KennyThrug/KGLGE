@@ -14,11 +14,13 @@ namespace KGLGE {
 	class GameObject
 	{
 	public:
+		bool shouldUpdate;
+		GameObject() { shouldUpdate = true; }
 		/// <summary>
 		/// This function is called every frame
 		/// </summary>
 		/// <returns>Whether or not to update the visuals of this gameObject</returns>
-		virtual bool update() = 0;
+		virtual void update() = 0;
 		/// <summary>
 		/// Getter for the Vertexes. Note; will go out of scope if the Vertexes are instantiated on the Stack
 		/// probably best to keep it on the Heap
@@ -40,9 +42,5 @@ namespace KGLGE {
 		/// </summary>
 		/// <returns>Number of Indicies that are returned with getIndicies</returns>
 		virtual unsigned int getNumTriangles() = 0;
-	protected:
-		//x and y coordinants in a global scale (not on screen where its -1 to 1 but on your own scale
-		float m_globalX;
-		float m_globalY;
 	};
 }

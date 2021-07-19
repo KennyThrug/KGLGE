@@ -1,8 +1,7 @@
 #include "DummyGO.h"
 
-bool KGLGE::DummyGO::update()
+void KGLGE::DummyGO::update()
 {
-	return true;
 }
 
 KGLGE::Vertex* KGLGE::DummyGO::getVertexes()

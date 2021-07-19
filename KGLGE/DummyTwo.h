@@ -7,7 +7,7 @@ namespace KGLGE {
     public:
         DummyTwo();
         // Inherited via GameObject
-        bool update() override;
+        void update() override;
         Vertex* getVertexes() override;
         unsigned int getNumVertex() override;
         Triangle* getIndicies(unsigned int offset) override;

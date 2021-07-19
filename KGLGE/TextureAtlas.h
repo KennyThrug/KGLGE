@@ -29,9 +29,10 @@ namespace KGLGE {
 		/// <summary>
 		/// Creates a Texture atlas, makes the values needed for it, and loads it to the shader
 		/// </summary>
-		TextureAtlas(const std::string folderPath,unsigned int layer);
+		TextureAtlas(const std::string& folderPath,unsigned int layer);
 		~TextureAtlas();
 		std::array<Position,4> getPositionsOf(const std::string& fileName);
+		unsigned int layer;
 	private:
 		void readJSon(const std::string& fileName);
 		void normalizeTexture(unsigned int index);

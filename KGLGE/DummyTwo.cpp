@@ -8,9 +8,9 @@ KGLGE::DummyTwo::DummyTwo()
     vert[3] = { {0,-1},{0,0},3 };
 }
 
-bool KGLGE::DummyTwo::update()
+void KGLGE::DummyTwo::update()
 {
-    return true;
+
 }
 float x = 0;
 KGLGE::Vertex* KGLGE::DummyTwo::getVertexes()
