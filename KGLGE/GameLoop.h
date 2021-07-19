@@ -12,6 +12,11 @@ namespace KGLGE {
 	struct Level {
 
 	};
+	struct KeyHandler {
+		unsigned int key;
+		unsigned int layer;
+		unsigned int num;
+	};
 
 	class GameLoop
 	{
@@ -26,8 +31,9 @@ namespace KGLGE {
 		/// Adds a gameObject to the list of gameObjects.
 		/// </summary>
 		/// <param name="obj">The object you want to add</param>
+		/// <param name="layer"> layer of the object, options are KGLGE_Background, KGLGE_Foreground, and KGLGE_MainGround
 		/// <returns>The index of the object, keep if you want to access it later</returns>
-		unsigned int addGameObject(GameObject* obj);
+		unsigned int addGameObject(GameObject* obj,unsigned int layer);
 		/// <summary>
 		/// Sets a gameObject to a specific index. Will override that object. Use if you want it to replace that index.
 		/// </summary>
@@ -40,10 +46,12 @@ namespace KGLGE {
 		/// </summary>
 		/// <param name="index"></param>
 		void removeGameObject(unsigned int index);
+		void addKeyHandler(unsigned int layer, unsigned int index,unsigned int key);
 	private:
 		void saveLevel();
 		Window* p_Window;
 		unsigned char m_numGameObjects[3];
+		std::vector<KeyHandler> handlers;
 		GameObject* gameObjects[3][32];
 	};
 

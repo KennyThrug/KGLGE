@@ -41,19 +41,19 @@ unsigned int KGLGE::DummyGO::getNumVertex()
 	return 12;
 }
 
-KGLGE::Triangle* KGLGE::DummyGO::getIndicies()
+KGLGE::Triangle* KGLGE::DummyGO::getIndicies(unsigned int offset)
 {
-	indicies[0].index1 = 0;
-	indicies[0].index2 = 1;
-	indicies[0].index3 = 2;
+	indicies[0].index1 = 0 + offset;
+	indicies[0].index2 = 1 + offset;
+	indicies[0].index3 = 2 + offset;
 
-	indicies[1].index1 = 2;
-	indicies[1].index2 = 3;
-	indicies[1].index3 = 0;
+	indicies[1].index1 = 2 + offset;
+	indicies[1].index2 = 3 + offset;
+	indicies[1].index3 = 0 + offset;
 
-	indicies[2].index1 = 4;
-	indicies[2].index2 = 5;
-	indicies[2].index3 = 6;
+	indicies[2].index1 = 4 + offset;
+	indicies[2].index2 = 5 + offset;
+	indicies[2].index3 = 6 + offset;
 
 
 	indicies[3].index1 = 6;
@@ -73,4 +73,9 @@ KGLGE::Triangle* KGLGE::DummyGO::getIndicies()
 unsigned int KGLGE::DummyGO::getNumTriangles()
 {
 	return 6;
+}
+
+bool KGLGE::DummyGO::respondToKey(unsigned int key)
+{
+	return false;
 }

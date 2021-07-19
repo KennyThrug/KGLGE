@@ -33,7 +33,9 @@ namespace KGLGE {
 		/// assuming that the Indicies of the verticies, assuming that it is the only set of vertexes
 		/// </summary>
 		/// <returns></returns>
-		virtual Triangle* getIndicies() = 0;
+		virtual Triangle* getIndicies(unsigned int offset) = 0;
+		virtual bool respondToKey(unsigned int key) = 0;
+
 		/// <summary>
 		/// </summary>
 		/// <returns>Number of Indicies that are returned with getIndicies</returns>

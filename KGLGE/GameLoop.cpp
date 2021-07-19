@@ -17,11 +17,12 @@ void KGLGE::GameLoop::startLoop()
 	GLuint aq = loadTexture("res/sprites/rowlett.png",3);*/
 	
 	DummyGO dum;
-	addGameObject(&dum);
+	addGameObject(&dum,1);
 
 	DummyTwo dummy;
-	gameObjects[0][1] = &dummy;
-	m_numGameObjects[0]++;
+	addGameObject(&dummy,1);
+
+	addKeyHandler(1, 0, GLFW_KEY_W);
 
 	while (!p_Window->shouldClose()) {
 		//Clean up from old stuff
@@ -32,6 +33,14 @@ void KGLGE::GameLoop::startLoop()
 		//Poll Events
 		p_Window->pollEvents();
 
+
+		//Key Handlers
+		for (int i = 0; i < handlers.size(); i++) {
+			if(p_Window->getKey(handlers[i].key))
+				gameObjects[handlers[i].layer][handlers[i].num]->respondToKey(handlers[i].key);
+		}
+
+		
 		//Loop through all the gameObjects
 		for (int i = 0; i < 3; i++) {
 			char numGameObjectsLeft = m_numGameObjects[i];
@@ -40,7 +49,7 @@ void KGLGE::GameLoop::startLoop()
 					//Updates
 					if (gameObjects[i][j]->update()) {
 						//Set Rendering
-						batcher.setValues(gameObjects[i][j]->getVertexes(), gameObjects[i][j]->getNumVertex(), gameObjects[i][j]->getIndicies(), gameObjects[i][j]->getNumTriangles());
+						batcher.setValues(gameObjects[i][j]->getVertexes(), gameObjects[i][j]->getNumVertex(), gameObjects[i][j]->getIndicies(batcher.getVertexPointer()), gameObjects[i][j]->getNumTriangles());
 					}
 					batcher.increaseCounter(gameObjects[i][j]->getNumVertex());
 					batcher.increaseIndex(gameObjects[i][j]->getNumTriangles());
@@ -50,6 +59,8 @@ void KGLGE::GameLoop::startLoop()
 		}
 		batcher.paint();
 
+
+
 		//Ending Loop Cleanup
 		p_Window->swapBuffers();
 
@@ -57,9 +68,14 @@ void KGLGE::GameLoop::startLoop()
 	return;
 }
 
-unsigned int KGLGE::GameLoop::addGameObject(GameObject* obj)
+unsigned int KGLGE::GameLoop::addGameObject(GameObject* obj,unsigned int layer)
 {
-	gameObjects[0][0] = obj;
-	m_numGameObjects[0]++;
+	gameObjects[layer][m_numGameObjects[layer]] = obj;
+	m_numGameObjects[layer]++;
 	return 0;
+}
+
+void KGLGE::GameLoop::addKeyHandler(unsigned int layer, unsigned int index, unsigned int key)
+{
+	handlers.push_back({ key,layer,index });
 }
