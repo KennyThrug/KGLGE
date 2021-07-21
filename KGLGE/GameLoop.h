@@ -6,6 +6,7 @@
 #include "DummyGO.h"
 #include "DummyTwo.h"
 #include "Time.hpp"
+#include <stack>
 
 namespace KGLGE {
 
@@ -43,7 +44,6 @@ namespace KGLGE {
 		/// <param name="obj">the object to be added</param>
 		/// <param name="index">the index to set the object in</param>
 		/// <returns>the index of the object, will be the same thing as index</returns>
-		unsigned int setGameObject(GameObject* obj, unsigned int index);
 		void setWindowSize(float min_x,float max_x, float min_y, float max_y) {
 			shader.setWindowSize(min_x, max_x, min_y, max_y);
 		}
@@ -51,9 +51,11 @@ namespace KGLGE {
 		/// removes a game object and allows that memory to be used
 		/// </summary>
 		/// <param name="index"></param>
-		void removeGameObject(unsigned int index);
+		void removeGameObject(unsigned int layer, unsigned int index);
 		void addKeyHandler(unsigned int layer, unsigned int index,unsigned int key);
+		void removeTexture(unsigned int index);
 	private:
+		std::stack<int> stk[3];
 		void saveLevel();
 		Window* p_Window;
 		unsigned char m_numGameObjects[3];

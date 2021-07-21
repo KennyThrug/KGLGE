@@ -15,6 +15,8 @@ namespace KGLGE {
 	{
 	public:
 		bool shouldUpdate;
+		//Generally don't manually delete this. It will probably be bad. instead use loop.removeGameObject
+		bool deleted = false;
 		GameObject() { shouldUpdate = true; }
 		/// <summary>
 		/// This function is called every frame
