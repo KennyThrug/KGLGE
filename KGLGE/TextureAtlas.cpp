@@ -89,10 +89,6 @@ void KGLGE::TextureAtlas::normalizeTexture(unsigned int index)
 	loadedTextures[index]->X_texSize = normalize(m_width, loadedTextures[index]->X_texSize);
 	loadedTextures[index]->Y_Position = normalize(m_height, loadedTextures[index]->Y_Position);
 	loadedTextures[index]->Y_texSize = normalize(m_height, loadedTextures[index]->Y_texSize);
-	std::cout << "X:" << loadedTextures[index]->X_Position << std::endl;
-	std::cout << "Y:" << loadedTextures[index]->Y_Position << std::endl;
-	std::cout << "Wid:" << loadedTextures[index]->X_texSize << std::endl;
-	std::cout << "Height:" << loadedTextures[index]->Y_texSize << std::endl;
 }
 
 std::string KGLGE::TextureAtlas::getValOfLine(std::string line)

@@ -26,6 +26,7 @@ namespace KGLGE {
 		void paintVerticies(unsigned int indiciesCount);
 		void setVerticies(Vertex* verticies, unsigned int lengthOfVertecies, unsigned int offsetOfVerticies, Triangle* indicies, unsigned int lengthOfIndicies, unsigned int offsetOfIndicies);
 		void setupSamplers();
+		void setWindowSize(float x_min, float x_max, float y_min, float y_max);
 	private:
 		unsigned int program;
 		unsigned int m_VA;

@@ -16,10 +16,15 @@ void runProgram() {
 	KGLGE::TextureAtlas cats(catz,KGLGE_BACKGROUND);
 
 	KGLGE::Sprite sp(&cats,0,0,1,1,"rowlett.png",2);
-	loop.addGameObject(&sp,0);
+	loop.addGameObject(&sp,1);
 
 	KGLGE::Sprite kp(&cats, -1, -1, 0.5f, 0.5f, "X.png");
-	loop.addGameObject(&kp, 0);
+	loop.addGameObject(&kp, 1);
+
+	KGLGE::Sprite nora(&cats, -0.5, 0, 1, 1, "Nora.png");
+	loop.addGameObject(&nora, 0);
+
+	//loop.setWindowSize(-2, 2, -2, 2);
 
 	loop.startLoop();
 	glfwTerminate();

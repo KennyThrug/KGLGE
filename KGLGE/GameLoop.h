@@ -21,7 +21,10 @@ namespace KGLGE {
 	class GameLoop
 	{
 	public:
-		GameLoop(Window* win) : p_Window(win) { shader.init(); }
+		GameLoop(Window* win) : p_Window(win) { 
+			shader.init();
+			setWindowSize(-1, 1, -1, 1);
+		}
 		/// <summary>
 		/// Starts the loop and runs it until Window.shouldClose() returns false 
 		/// at this point you will lose control and everything will most likely need to happen in a GameObject's update loop
@@ -41,6 +44,9 @@ namespace KGLGE {
 		/// <param name="index">the index to set the object in</param>
 		/// <returns>the index of the object, will be the same thing as index</returns>
 		unsigned int setGameObject(GameObject* obj, unsigned int index);
+		void setWindowSize(float min_x,float max_x, float min_y, float max_y) {
+			shader.setWindowSize(min_x, max_x, min_y, max_y);
+		}
 		/// <summary>
 		/// removes a game object and allows that memory to be used
 		/// </summary>

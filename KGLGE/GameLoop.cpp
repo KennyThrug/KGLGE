@@ -10,6 +10,7 @@ void KGLGE::GameLoop::startLoop()
 		//Clean up from old stuff
 		batcher.resetCounters();
 		p_Window->clearWindow(1, 1, 0, 1);
+
 		//updateTime();
 
 		//Poll Events
