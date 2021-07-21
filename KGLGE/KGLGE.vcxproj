@@ -167,6 +167,7 @@
     <ClInclude Include="Batcher.h" />
     <ClInclude Include="GameLoop.h" />
     <ClInclude Include="GameObject.h" />
+    <ClInclude Include="Level.h" />
     <ClInclude Include="Math.hpp" />
     <ClInclude Include="Runner.h" />
     <ClInclude Include="ShaderProgram.h" />
@@ -178,6 +179,7 @@
   <ItemGroup>
     <ClCompile Include="Batcher.cpp" />
     <ClCompile Include="GameLoop.cpp" />
+    <ClCompile Include="Level.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="ShaderProgram.cpp" />
     <ClCompile Include="Sprite.cpp" />

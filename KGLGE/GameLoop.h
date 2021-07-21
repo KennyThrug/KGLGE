@@ -8,9 +8,6 @@
 
 namespace KGLGE {
 
-	struct Level {
-
-	};
 	struct KeyHandler {
 		unsigned int key;
 		unsigned int layer;
