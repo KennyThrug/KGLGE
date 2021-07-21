@@ -3,7 +3,7 @@
 namespace KGLGE {
 	static float deltaTime;
 	static float prevTime;
-	void updateTime() {
+	static void updateTime() {
 		deltaTime = prevTime - clock();
 		prevTime = clock();
 	}

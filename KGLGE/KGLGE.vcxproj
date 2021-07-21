@@ -165,20 +165,26 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Batcher.h" />
+    <ClInclude Include="DummyGO.h" />
+    <ClInclude Include="DummyTwo.h" />
     <ClInclude Include="GameLoop.h" />
     <ClInclude Include="GameObject.h" />
     <ClInclude Include="Math.hpp" />
     <ClInclude Include="Runner.h" />
     <ClInclude Include="ShaderProgram.h" />
+    <ClInclude Include="Sprite.h" />
     <ClInclude Include="TextureAtlas.h" />
     <ClInclude Include="Time.hpp" />
     <ClInclude Include="Window.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Batcher.cpp" />
+    <ClCompile Include="DummyGO.cpp" />
+    <ClCompile Include="DummyTwo.cpp" />
     <ClCompile Include="GameLoop.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="ShaderProgram.cpp" />
+    <ClCompile Include="Sprite.cpp" />
     <ClCompile Include="Test.cpp" />
     <ClCompile Include="TextureAtlas.cpp" />
     <ClCompile Include="Window.cpp" />

@@ -1,62 +1,74 @@
 #include "ShaderProgram.h"
 
-ShaderProgram::ShaderProgram(std::string VertexShaderFileName, std::string FragmentShaderFileName)
+KGLGE::ShaderProgram::ShaderProgram(std::string VertexShaderFileName, std::string FragmentShaderFileName)
 {
 	usePrograms(VertexShaderFileName,FragmentShaderFileName);
 
 }
 
-void ShaderProgram::init()
+void KGLGE::ShaderProgram::init()
 {
-	float vertecies[] = {
-		0,1,0,1,1,
-		1,1,1,1,1,
-		1,0,1,0,1,
-		0,0,0,0,1,
+	KGLGE::Vertex vert[2000];
 
-		0,-1,0,1,0,
-		-1,-1,1,1,0,
-		-1,0,1,0,0,
-		0,0,0,0,0
-	};
 	glCreateVertexArrays(1, &m_VA);
 	glBindVertexArray(m_VA);
 
 	glCreateBuffers(1, &m_VB);
 	glBindBuffer(GL_ARRAY_BUFFER,m_VB);
-	glBufferData(GL_ARRAY_BUFFER, sizeof(vertecies), vertecies, GL_STATIC_DRAW);
+	glBufferData(GL_ARRAY_BUFFER, sizeof(vert), vert, GL_DYNAMIC_DRAW);
 
 	glEnableVertexArrayAttrib(m_VB, 0);
-	glVertexAttribPointer(0, 2, GL_FLOAT, GL_FALSE, 5 * sizeof(float),0);
+	glVertexAttribPointer(0, 2, GL_FLOAT, GL_FALSE, sizeof(KGLGE::Vertex),0);
 
 	glEnableVertexArrayAttrib(m_VB, 1);
-	glVertexAttribPointer(1, 2, GL_FLOAT, GL_FALSE, 5 * sizeof(float), (const void*)(8));
+	glVertexAttribPointer(1, 2, GL_FLOAT, GL_FALSE, sizeof(KGLGE::Vertex), (const void*)(offsetof(KGLGE::Vertex,texPos)));
 
 	glEnableVertexArrayAttrib(m_VB, 2);
-	glVertexAttribPointer(2, 1, GL_FLOAT, GL_FALSE, 5 * sizeof(float), (const void*)(16));
+	glVertexAttribPointer(2, 1, GL_FLOAT, GL_FALSE, sizeof(KGLGE::Vertex), (const void*)(offsetof(KGLGE::Vertex,texID)));
 
-	unsigned int indicies[] = {
-		0,1,2,
-		2,3,0,
-
-		4,5,6,
-		6,7,4
-	};
 
 	glCreateBuffers(1, &m_IB);
 	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, m_IB);
-	glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(indicies), indicies, GL_STATIC_DRAW);
+	glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(unsigned int) * 1500, NULL, GL_DYNAMIC_DRAW);
+
+	setupSamplers();
 
 }
 
-void ShaderProgram::paintVerticies(float* verticies, unsigned int verteciesCount, unsigned int* indicies, unsigned int indiciesCount)
+void KGLGE::ShaderProgram::paintVerticies(unsigned int indiciesCount)
 {
 	glUseProgram(program);
 	glBindVertexArray(m_VA);
-	glDrawElements(GL_TRIANGLES, 12, GL_UNSIGNED_INT, nullptr);
+	glDrawElements(GL_TRIANGLES, indiciesCount * 3, GL_UNSIGNED_INT, nullptr);
 }
 
-void ShaderProgram::usePrograms(const std::string VertexShaderFileName, const std::string FragmentShaderFileName)
+void KGLGE::ShaderProgram::setVerticies(KGLGE::Vertex* verticies, unsigned int lengthOfVertecies, unsigned int offsetOfVerticies, Triangle* indicies, unsigned int lengthOfIndicies, unsigned int offsetOfIndicies)
+{
+	glBindBuffer(GL_ARRAY_BUFFER, m_VB);
+	glBufferSubData(GL_ARRAY_BUFFER, offsetOfVerticies * sizeof(Vertex), sizeof(Vertex) * lengthOfVertecies, verticies);
+
+	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, m_IB);
+	glBufferSubData(GL_ELEMENT_ARRAY_BUFFER, offsetOfIndicies * sizeof(Triangle), sizeof(Triangle) * lengthOfIndicies, indicies);
+}
+
+void KGLGE::ShaderProgram::setupSamplers()
+{
+	glUseProgram(program);
+
+	GLint ImageLoc = glGetUniformLocation(program, "u_Texture");
+
+	int texID[8] = { 0,1,2,3,4,5,6,7 };
+
+	glUniform1iv(ImageLoc, 8, texID);
+}
+
+void KGLGE::ShaderProgram::setWindowSize(float x_min, float x_max, float y_min, float y_max)
+{
+	float winSize[4] = { x_min,x_max,y_min,y_max };
+	glUniform1fv(glGetUniformLocation(program, "u_windowSize"), 4, winSize);
+}
+
+void KGLGE::ShaderProgram::usePrograms(const std::string VertexShaderFileName, const std::string FragmentShaderFileName)
 {
 	program = glCreateProgram();
 	unsigned int vs = compileShader(GL_VERTEX_SHADER, readShader(VertexShaderFileName));
@@ -73,7 +85,7 @@ void ShaderProgram::usePrograms(const std::string VertexShaderFileName, const st
 	glUseProgram(program);
 }
 
-std::string ShaderProgram::readShader(const std::string& fileName)
+std::string KGLGE::ShaderProgram::readShader(const std::string& fileName)
 {
 	std::ifstream stream(fileName);
 
@@ -85,7 +97,7 @@ std::string ShaderProgram::readShader(const std::string& fileName)
 	return ss.str();
 }
 
-unsigned int ShaderProgram::compileShader(unsigned int type, const std::string& source)
+unsigned int KGLGE::ShaderProgram::compileShader(unsigned int type, const std::string& source)
 {
 	unsigned int id = glCreateShader(type);
 	const char* src = source.c_str();

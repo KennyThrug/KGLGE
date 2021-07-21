@@ -1,0 +1,39 @@
+{
+    "Metadata": [
+        {
+            "name": "Nora.png",
+            "x": 0,
+            "y": 0,
+            "width": 4032,
+            "height": 3024
+        },
+        {
+            "name": "Hilda.png",
+            "x": 4032,
+            "y": 0,
+            "width": 4032,
+            "height": 3024
+        },
+        {
+            "name": "Steeler.png",
+            "x": 0,
+            "y": 3024,
+            "width": 3330,
+            "height": 3023
+        },
+        {
+            "name": "rowlett.png",
+            "x": 3330,
+            "y": 3024,
+            "width": 894,
+            "height": 894
+        },
+        {
+            "name": "X.png",
+            "x": 4224,
+            "y": 3024,
+            "width": 56,
+            "height": 37
+        }
+    ]
+}
