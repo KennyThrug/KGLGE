@@ -3,8 +3,6 @@
 #include "Batcher.h"
 #include "ShaderProgram.h"
 #include "TextureAtlas.h"
-#include "DummyGO.h"
-#include "DummyTwo.h"
 #include "Time.hpp"
 #include <stack>
 

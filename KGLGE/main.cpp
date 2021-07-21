@@ -3,6 +3,5 @@
 #include "Runner.h"
 
 int main() {
-	kk k;
-	k.runProgram();
+	runProgram();
 }
