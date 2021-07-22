@@ -1,4 +1,7 @@
 #include "GameLoop.h"
+void KGLGE::GameLoop::update() {
+
+}
 
 void KGLGE::GameLoop::startLoop()
 {
@@ -44,6 +47,7 @@ void KGLGE::GameLoop::startLoop()
 		batcher.paint();
 
 		//Main Update Loop
+		update();
 
 		//Ending Loop Cleanup
 		p_Window->swapBuffers();

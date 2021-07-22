@@ -8,15 +8,12 @@
 
 namespace KGLGE {
 
-	struct KeyHandler {
-		unsigned int key;
-		unsigned int layer;
-		unsigned int num;
-	};
+
 
 	class GameLoop
 	{
 	public:
+		virtual void update();
 		GameLoop(Window* win) : p_Window(win) { 
 			shader.init();
 			setWindowSize(-1, 1, -1, 1);
@@ -49,13 +46,19 @@ namespace KGLGE {
 		void removeGameObject(unsigned int layer, unsigned int index);
 		void addKeyHandler(unsigned int layer, unsigned int index,unsigned int key);
 		void removeTexture(unsigned int index);
+	protected:
+		GameObject* gameObjects[3][32];
 	private:
+		struct KeyHandler {
+			unsigned int key;
+			unsigned int layer;
+			unsigned int num;
+		};
 		std::stack<int> stk[3];
 		void saveLevel();
 		Window* p_Window;
 		unsigned char m_numGameObjects[3];
 		std::vector<KeyHandler> handlers;
-		GameObject* gameObjects[3][32];
 		ShaderProgram shader;
 	};
 
