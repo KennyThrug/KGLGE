@@ -33,6 +33,7 @@ void KGLGE::GameLoop::startLoop()
 			for (int j = 0; j < 32 || numGameObjectsLeft != 0; j++) {
 				if (gameObjects[i][j] != nullptr && !gameObjects[i][j]->deleted) {
 					//Updates
+					gameObjects[i][j]->update();
 					if (gameObjects[i][j]->shouldUpdate) {
 						//Set Rendering
 						gameObjects[i][j]->shouldUpdate = false;
