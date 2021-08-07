@@ -45,9 +45,13 @@ namespace KGLGE {
 		/// <param name="index"></param>
 		void removeGameObject(unsigned int layer, unsigned int index);
 		void addKeyHandler(unsigned int layer, unsigned int index,unsigned int key);
+		//Unimplemented
 		void removeTexture(unsigned int index);
+
 	protected:
+		float r, g, b, a;
 		GameObject* gameObjects[3][32];
+		unsigned char m_numGameObjects[3];
 	private:
 		struct KeyHandler {
 			unsigned int key;
@@ -55,9 +59,7 @@ namespace KGLGE {
 			unsigned int num;
 		};
 		std::stack<int> stk[3];
-		void saveLevel();
 		Window* p_Window;
-		unsigned char m_numGameObjects[3];
 		std::vector<KeyHandler> handlers;
 		ShaderProgram shader;
 	};

@@ -26,6 +26,9 @@ void KGLGE::ShaderProgram::init()
 	glEnableVertexArrayAttrib(m_VB, 2);
 	glVertexAttribPointer(2, 1, GL_FLOAT, GL_FALSE, sizeof(KGLGE::Vertex), (const void*)(offsetof(KGLGE::Vertex,texID)));
 
+	glEnableVertexArrayAttrib(m_VB, 3);
+	glVertexAttribPointer(3, 4, GL_FLOAT, GL_FALSE, sizeof(KGLGE::Vertex), (const void*)(offsetof(KGLGE::Vertex, red)));
+
 
 	glCreateBuffers(1, &m_IB);
 	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, m_IB);

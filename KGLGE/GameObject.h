@@ -5,6 +5,7 @@ namespace KGLGE {
 		Position position;
 		Position texPos;
 		float texID;
+		float red; float green; float blue; float alpha;
 	};
 	struct Triangle {
 		unsigned int index1;

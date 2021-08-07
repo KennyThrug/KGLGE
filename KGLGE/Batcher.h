@@ -8,9 +8,6 @@
 /// 
 /// </summary>
 namespace KGLGE {
-	struct {
-
-	};
 	class Batcher
 	{
 	public:

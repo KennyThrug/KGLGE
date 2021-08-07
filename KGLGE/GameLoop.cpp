@@ -12,7 +12,7 @@ void KGLGE::GameLoop::startLoop()
 	while (!p_Window->shouldClose()) {
 		//Clean up from old stuff
 		batcher.resetCounters();
-		p_Window->clearWindow(1, 1, 0, 1);
+		p_Window->clearWindow(r, g, b, a);
 
 		//updateTime();
 
