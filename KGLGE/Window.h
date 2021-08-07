@@ -9,6 +9,7 @@ namespace KGLGE {
 	{
 	public:
 		Window(int width, int height, const char* name);
+		Window(const char* name);
 		/// <summary>
 		/// Displays the window
 		/// </summary>

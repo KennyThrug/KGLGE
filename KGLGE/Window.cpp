@@ -23,6 +23,20 @@ KGLGE::Window::Window(int width, int height, const char* name)
 	}
 }
 
+KGLGE::Window::Window(const char* name)
+{
+	if (!glfwInit()) {
+		throw "Failed to initialize GLFW";
+	}
+
+
+	window = glfwCreateWindow(glfwGetVideoMode(glfwGetPrimaryMonitor())->height, glfwGetVideoMode(glfwGetPrimaryMonitor())->height, name, NULL, NULL);
+	if (!window) {
+		glfwTerminate();
+		throw "Failed to create GLFW Window";
+	}
+}
+
 void KGLGE::Window::display()
 {
 	glfwMakeContextCurrent(window);

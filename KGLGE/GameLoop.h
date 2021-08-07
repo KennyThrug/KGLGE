@@ -47,7 +47,7 @@ namespace KGLGE {
 		void addKeyHandler(unsigned int layer, unsigned int index,unsigned int key);
 		//Unimplemented
 		void removeTexture(unsigned int index);
-
+		Window* getWin() { return p_Window; }
 	protected:
 		float r, g, b, a;
 		GameObject* gameObjects[3][32];
