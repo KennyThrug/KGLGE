@@ -23,6 +23,13 @@ namespace KGLGE {
 		void clearWindow(float r, float g, float b, float a);
 		void pollEvents();
 		bool getKey(unsigned int key);
+		bool getMouseButton(unsigned int button);
+		void getSize(int* width, int* height) {
+			glfwGetWindowSize(window, width, height);
+		}
+		void getMousePosition(double *xPos, double *yPos) {
+			glfwGetCursorPos(window,xPos,yPos);
+		}
 	private:
 		GLFWwindow* window;
 	};

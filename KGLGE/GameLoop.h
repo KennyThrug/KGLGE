@@ -48,6 +48,7 @@ namespace KGLGE {
 		//Unimplemented
 		void removeTexture(unsigned int index);
 		Window* getWin() { return p_Window; }
+		GameObject* getGameObject(int layer, int num) { return gameObjects[layer][num]; }
 	protected:
 		float r, g, b, a;
 		GameObject* gameObjects[3][32];

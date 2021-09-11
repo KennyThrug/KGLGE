@@ -2,7 +2,7 @@
 #include "GameObject.h"
 #include "TextureAtlas.h"
 namespace KGLGE {
-	class Image : KGLGE::GameObject {
+	class Image : public KGLGE::GameObject {
 	public:
 		Image(float x, float y, float width, float height, std::string fileName, unsigned int texSlot);
 		// Inherited via GameObject
