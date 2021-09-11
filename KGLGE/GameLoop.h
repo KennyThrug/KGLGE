@@ -3,24 +3,17 @@
 #include "Batcher.h"
 #include "ShaderProgram.h"
 #include "TextureAtlas.h"
-#include "DummyGO.h"
-#include "DummyTwo.h"
 #include "Time.hpp"
+#include <stack>
 
 namespace KGLGE {
 
-	struct Level {
 
-	};
-	struct KeyHandler {
-		unsigned int key;
-		unsigned int layer;
-		unsigned int num;
-	};
 
 	class GameLoop
 	{
 	public:
+		virtual void update();
 		GameLoop(Window* win) : p_Window(win) { 
 			shader.init();
 			setWindowSize(-1, 1, -1, 1);
@@ -43,7 +36,6 @@ namespace KGLGE {
 		/// <param name="obj">the object to be added</param>
 		/// <param name="index">the index to set the object in</param>
 		/// <returns>the index of the object, will be the same thing as index</returns>
-		unsigned int setGameObject(GameObject* obj, unsigned int index);
 		void setWindowSize(float min_x,float max_x, float min_y, float max_y) {
 			shader.setWindowSize(min_x, max_x, min_y, max_y);
 		}
@@ -51,14 +43,25 @@ namespace KGLGE {
 		/// removes a game object and allows that memory to be used
 		/// </summary>
 		/// <param name="index"></param>
-		void removeGameObject(unsigned int index);
+		void removeGameObject(unsigned int layer, unsigned int index);
 		void addKeyHandler(unsigned int layer, unsigned int index,unsigned int key);
-	private:
-		void saveLevel();
-		Window* p_Window;
-		unsigned char m_numGameObjects[3];
-		std::vector<KeyHandler> handlers;
+		//Unimplemented
+		void removeTexture(unsigned int index);
+		Window* getWin() { return p_Window; }
+		GameObject* getGameObject(int layer, int num) { return gameObjects[layer][num]; }
+	protected:
+		float r, g, b, a;
 		GameObject* gameObjects[3][32];
+		unsigned char m_numGameObjects[3];
+	private:
+		struct KeyHandler {
+			unsigned int key;
+			unsigned int layer;
+			unsigned int num;
+		};
+		std::stack<int> stk[3];
+		Window* p_Window;
+		std::vector<KeyHandler> handlers;
 		ShaderProgram shader;
 	};
 

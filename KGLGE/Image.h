@@ -1,14 +1,10 @@
 #pragma once
-#include "Math.hpp"
 #include "GameObject.h"
 #include "TextureAtlas.h"
 namespace KGLGE {
-	/// <summary>
-	/// Sprite that uses a TextureAtlas, instead of a single img
-	/// </summary>
-	class Sprite : public GameObject {
+	class Image : public KGLGE::GameObject {
 	public:
-		Sprite(TextureAtlas* atlas,float x, float y, float width, float height,std::string fileName,unsigned int numRotations = 0);
+		Image(float x, float y, float width, float height, std::string fileName, unsigned int texSlot);
 		// Inherited via GameObject
 		virtual void update() override;
 		virtual Vertex* getVertexes() override;

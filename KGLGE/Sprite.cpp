@@ -56,23 +56,5 @@ unsigned int KGLGE::Sprite::getNumTriangles()
 
 bool KGLGE::Sprite::respondToKey(unsigned int key)
 {
-	switch(key){
-	case GLFW_KEY_W:
-		m_y += 0.01f;
-		shouldUpdate = true;
-		break;
-	case GLFW_KEY_S:
-		m_y -= 0.01f;
-		shouldUpdate = true;
-		break;
-	case GLFW_KEY_D:
-		m_x += 0.01f;
-		shouldUpdate = true;
-		break;
-	case GLFW_KEY_A:
-		m_x -= 0.01f;
-		shouldUpdate = true;
-		break;
-	}
 	return false;
 }

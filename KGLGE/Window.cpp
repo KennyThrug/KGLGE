@@ -16,7 +16,21 @@ KGLGE::Window::Window(int width, int height, const char* name)
 	}
 
 
-	window = glfwCreateWindow(height, width, name, NULL, NULL);
+	window = glfwCreateWindow(width, height, name, NULL, NULL);
+	if (!window) {
+		glfwTerminate();
+		throw "Failed to create GLFW Window";
+	}
+}
+
+KGLGE::Window::Window(const char* name)
+{
+	if (!glfwInit()) {
+		throw "Failed to initialize GLFW";
+	}
+
+
+	window = glfwCreateWindow(glfwGetVideoMode(glfwGetPrimaryMonitor())->width, glfwGetVideoMode(glfwGetPrimaryMonitor())->height, name, NULL, NULL);
 	if (!window) {
 		glfwTerminate();
 		throw "Failed to create GLFW Window";
@@ -55,4 +69,7 @@ void KGLGE::Window::pollEvents()
 bool KGLGE::Window::getKey(unsigned int key)
 {
 	return glfwGetKey(window, key);
+}
+bool KGLGE::Window::getMouseButton(unsigned int button) {
+	return glfwGetMouseButton(window,button);
 }
