@@ -173,6 +173,7 @@
     <ClInclude Include="Runner.h" />
     <ClInclude Include="ShaderProgram.h" />
     <ClInclude Include="Sprite.h" />
+    <ClInclude Include="Square.h" />
     <ClInclude Include="TextureAtlas.h" />
     <ClInclude Include="Time.hpp" />
     <ClInclude Include="Window.h" />
@@ -185,6 +186,7 @@
     <ClCompile Include="main.cpp" />
     <ClCompile Include="ShaderProgram.cpp" />
     <ClCompile Include="Sprite.cpp" />
+    <ClCompile Include="Square.cpp" />
     <ClCompile Include="Test.cpp" />
     <ClCompile Include="TextureAtlas.cpp" />
     <ClCompile Include="Window.cpp" />

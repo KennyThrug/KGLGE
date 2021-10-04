@@ -1,6 +1,11 @@
 #include "GameLoop.h"
 void KGLGE::GameLoop::update() {
-
+	if (getWin()->getMouseButton(GLFW_MOUSE_BUTTON_1))
+		std::cout << "Mouse1";
+	if (getWin()->getKey(GLFW_KEY_J, true)) {
+		setWindowSize(-2, 2, -2, 2);
+		setAllObjectsToRedraw();
+	}
 }
 
 void KGLGE::GameLoop::startLoop()
@@ -34,7 +39,7 @@ void KGLGE::GameLoop::startLoop()
 				if (gameObjects[i][j] != nullptr && !gameObjects[i][j]->deleted) {
 					//Updates
 					gameObjects[i][j]->update();
-					if (gameObjects[i][j]->shouldUpdate) {
+					if (allObjectsRerender || gameObjects[i][j]->shouldUpdate) {
 						//Set Rendering
 						gameObjects[i][j]->shouldUpdate = false;
 						batcher.setValues(gameObjects[i][j]->getVertexes(), gameObjects[i][j]->getNumVertex(), gameObjects[i][j]->getIndicies(batcher.getVertexPointer()), gameObjects[i][j]->getNumTriangles());
@@ -52,7 +57,7 @@ void KGLGE::GameLoop::startLoop()
 
 		//Ending Loop Cleanup
 		p_Window->swapBuffers();
-
+		allObjectsRerender = false;
 	}
 	return;
 }
@@ -80,4 +85,9 @@ void KGLGE::GameLoop::removeGameObject(unsigned int layer,unsigned int index)
 void KGLGE::GameLoop::addKeyHandler(unsigned int layer, unsigned int index, unsigned int key)
 {
 	handlers.push_back({ key,layer,index });
+}
+
+void KGLGE::GameLoop::setAllObjectsToRedraw()
+{
+	allObjectsRerender = true;
 }

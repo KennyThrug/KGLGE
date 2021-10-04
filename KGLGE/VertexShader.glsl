@@ -11,17 +11,24 @@ out vec2 v_TexCoord;
 out float v_texID;
 out vec4 v_colour;
 
-float toLocal(float start, float maximum, float minimum);
-
+float toLocal(float start,float maximum, float minimum){
+	if(minimum == maximum){
+		minimum = -1;
+		maximum = 1;
+	}
+	else{
+		return start - 0.25;
+	}
+	return (((start-minimum)/(maximum-minimum) * 2) - 1);
+}
 void main()
 {
-	vec4 localPos = vec4(toLocal(position[0],u_windowSize[1],u_windowSize[0]),toLocal(position[1],u_windowSize[3],u_windowSize[2]),position[2],position[3]);
-	gl_Position= position;
+	vec4 localPos = vec4(toLocal(position[0],u_windowSize[1],u_windowSize[0]),
+						toLocal(position[1],u_windowSize[3],u_windowSize[2]),
+						toLocal(position[2],u_windowSize[1],u_windowSize[0]),
+						toLocal(position[3],u_windowSize[3],u_windowSize[2]));
+	gl_Position= localPos;
 	v_texID = texID;
 	v_TexCoord = texCoord;
-	v_colour = colour;
-}
-
-float toLocal(float start,float maximum, float minimum){
-	return float((position * 2) / (maximum - minimum));
+	v_colour = u_windowSize;
 }

@@ -47,6 +47,7 @@ namespace KGLGE {
 		void addKeyHandler(unsigned int layer, unsigned int index,unsigned int key);
 		//Unimplemented
 		void removeTexture(unsigned int index);
+		void setAllObjectsToRedraw();
 		Window* getWin() { return p_Window; }
 		GameObject* getGameObject(int layer, int num) { return gameObjects[layer][num]; }
 	protected:
@@ -54,6 +55,7 @@ namespace KGLGE {
 		GameObject* gameObjects[3][32];
 		unsigned char m_numGameObjects[3];
 	private:
+		bool allObjectsRerender = false;
 		struct KeyHandler {
 			unsigned int key;
 			unsigned int layer;
