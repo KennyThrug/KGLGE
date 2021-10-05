@@ -25,6 +25,7 @@ KGLGE::Sprite::Sprite(TextureAtlas* atlas, float x, float y, float width, float 
 
 void KGLGE::Sprite::update()
 {
+	
 }
 
 KGLGE::Vertex* KGLGE::Sprite::getVertexes()

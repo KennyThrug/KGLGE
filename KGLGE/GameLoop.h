@@ -13,6 +13,8 @@ namespace KGLGE {
 	class GameLoop
 	{
 	public:
+		float aa = 0;
+		float bb = 0;
 		virtual void update();
 		GameLoop(Window* win) : p_Window(win) { 
 			shader.init();
@@ -38,13 +40,14 @@ namespace KGLGE {
 		/// <returns>the index of the object, will be the same thing as index</returns>
 		void setWindowSize(float min_x,float max_x, float min_y, float max_y) {
 			shader.setWindowSize(min_x, max_x, min_y, max_y);
+			setAllObjectsToRedraw();
 		}
 		/// <summary>
 		/// removes a game object and allows that memory to be used
 		/// </summary>
 		/// <param name="index"></param>
 		void removeGameObject(unsigned int layer, unsigned int index);
-		void addKeyHandler(unsigned int layer, unsigned int index,unsigned int key);
+		void addKeyHandler(unsigned int layer, unsigned int index,unsigned int key,bool pressOnce = false);
 		//Unimplemented
 		void removeTexture(unsigned int index);
 		void setAllObjectsToRedraw();
@@ -60,6 +63,7 @@ namespace KGLGE {
 			unsigned int key;
 			unsigned int layer;
 			unsigned int num;
+			bool pressOnce;
 		};
 		std::stack<int> stk[3];
 		Window* p_Window;
