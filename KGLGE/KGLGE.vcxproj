@@ -175,7 +175,6 @@
     <ClInclude Include="Sprite.h" />
     <ClInclude Include="Square.h" />
     <ClInclude Include="TextureAtlas.h" />
-    <ClInclude Include="Time.hpp" />
     <ClInclude Include="Window.h" />
   </ItemGroup>
   <ItemGroup>

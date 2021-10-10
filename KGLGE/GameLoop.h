@@ -3,8 +3,8 @@
 #include "Batcher.h"
 #include "ShaderProgram.h"
 #include "TextureAtlas.h"
-#include "Time.hpp"
 #include <stack>
+#include "Square.h"
 
 namespace KGLGE {
 
@@ -53,11 +53,23 @@ namespace KGLGE {
 		void setAllObjectsToRedraw();
 		Window* getWin() { return p_Window; }
 		GameObject* getGameObject(int layer, int num) { return gameObjects[layer][num]; }
+		int getFPS();
+		int getNumTicks();
+		/// <summary>
+		/// Returns Time, in seconds that the program has been running
+		/// </summary>
+		/// <returns></returns>
+		double getTimeSinceProgramStart();
 	protected:
 		float r, g, b, a;
-		GameObject* gameObjects[3][32];
+		GameObject* gameObjects[3][4096];
 		unsigned char m_numGameObjects[3];
 	private:
+		int ticks;
+		double timeProgramStarted = glfwGetTime();
+		double prevTime = glfwGetTime();
+		int FPS = 0;
+		void updateTime();
 		bool allObjectsRerender = false;
 		struct KeyHandler {
 			unsigned int key;

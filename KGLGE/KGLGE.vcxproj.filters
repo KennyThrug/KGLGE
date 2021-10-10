@@ -13,9 +13,6 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
-    <Filter Include="Header Files\Helpers">
-      <UniqueIdentifier>{a7813f2f-2e7a-4692-bc83-a7ef69d83861}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Header Files\GameEngine">
       <UniqueIdentifier>{d355ee83-2d55-4949-bf4e-e927cda9ed78}</UniqueIdentifier>
     </Filter>
@@ -45,9 +42,6 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Time.hpp">
-      <Filter>Header Files\Helpers</Filter>
-    </ClInclude>
     <ClInclude Include="GameLoop.h">
       <Filter>Header Files\GameEngine</Filter>
     </ClInclude>
