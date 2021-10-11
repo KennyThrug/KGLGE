@@ -84,6 +84,7 @@ bool KGLGE::Window::getKey(unsigned int key,bool pressOnce)
 	if (!glfwGetKey(window, key))
 		return false;
 	lastFrameValue[One ? 0 : 1][curNum] = key;
+	curNum++;
 	if (!pressOnce)
 		return true;
 	return !checkIfUsedLastFrame(key, One ? 1 : 0);
@@ -93,6 +94,7 @@ bool KGLGE::Window::getMouseButton(unsigned int button,bool pressOnce) {
 	if (!glfwGetMouseButton(window, button))
 		return false;
 	lastFrameValue[One ? 0 : 1][curNum] = button;
+	curNum++;
 	if (!pressOnce)
 		return true;
 	return !checkIfUsedLastFrame(button, One ? 1 : 0);

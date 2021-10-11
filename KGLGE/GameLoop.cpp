@@ -1,5 +1,8 @@
 #include "GameLoop.h"
 void KGLGE::GameLoop::update() {
+	getWin()->getKey(GLFW_KEY_A, true);
+	getWin()->getKey(GLFW_KEY_B, true);
+	getWin()->getKey(GLFW_KEY_C);
 	if (getWin()->getKey(GLFW_KEY_SPACE, true)) {
 		removeGameObject(KGLGE_MAIN, 0);
 	}
