@@ -8,8 +8,14 @@ void KGLGE::Sprite::resetTextures() {
 }
 
 KGLGE::Sprite::Sprite(TextureAtlas* atlas, float x, float y, float width, float height,std::string fileName,unsigned int numRotations)
-	:m_x(x), m_y(y), m_Width(width), m_Height(height), GameObject()
+	: GameObject()
 {
+
+	m_x = x;
+	m_y = y;
+	m_Height = height;
+	m_Width = width;
+
 	std::array<KGLGE::Position,4> p = rotate90deg(atlas->getPositionsOf(fileName),numRotations);
 
 	m_vertex[0].texPos = p[0];

@@ -41,6 +41,16 @@ namespace KGLGE {
 		virtual Triangle* getIndicies(unsigned int offset) = 0;
 		virtual bool respondToKey(unsigned int key) = 0;
 
+		virtual float getX() { return m_x; }
+		virtual float getY() { return m_y; };
+		virtual float getWidth() { return m_Width; };
+		virtual float getHeight() { return m_Height; };
+
+		float m_x;
+		float m_y;
+		float m_Width;
+		float m_Height;
+
 		/// <summary>
 		/// </summary>
 		/// <returns>Number of Indicies that are returned with getIndicies</returns>

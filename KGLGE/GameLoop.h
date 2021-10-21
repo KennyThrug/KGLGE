@@ -60,6 +60,7 @@ namespace KGLGE {
 		/// </summary>
 		/// <returns></returns>
 		double getTimeSinceProgramStart();
+		bool checkCollision(int indexOneLayer, int indexOne, int indexTwoLayer, int indexTwo,float xDiff = 0, float yDiff = 0);
 	protected:
 		float r, g, b, a;
 		GameObject* gameObjects[3][4096];

@@ -1,7 +1,12 @@
 #include "Square.h"
 
-Square::Square(float x, float y, float w, float h, float red, float green, float blue, float alpha) : m_Height(h), m_Width(w), m_y(y), m_x(x)
+KGLGE::Square::Square(float x, float y, float w, float h, float red, float green, float blue, float alpha)
 {
+	m_x = x;
+	m_y = y;
+	m_Height = h;
+	m_Width = w;
+
 	m_vertex[0].red = red;
 	m_vertex[0].green = green;
 	m_vertex[0].blue = blue;
@@ -25,7 +30,7 @@ Square::Square(float x, float y, float w, float h, float red, float green, float
 	m_vertex[3].texID = -1;
 }
 
-void Square::update()
+void KGLGE::Square::update()
 {
 	m_vertex[0].position = { m_x,m_y };
 	m_vertex[1].position = { m_x + m_Width,m_y };
@@ -33,17 +38,17 @@ void Square::update()
 	m_vertex[3].position = { m_x,m_y + m_Height };
 }
 
-KGLGE::Vertex* Square::getVertexes()
+KGLGE::Vertex* KGLGE::Square::getVertexes()
 {
 	return m_vertex;
 }
 
-unsigned int Square::getNumVertex()
+unsigned int KGLGE::Square::getNumVertex()
 {
 	return 4;
 }
 
-KGLGE::Triangle* Square::getIndicies(unsigned int offset)
+KGLGE::Triangle* KGLGE::Square::getIndicies(unsigned int offset)
 {
 	m_Triangles[0].index1 = 0 + offset;
 	m_Triangles[0].index2 = 1 + offset;
@@ -54,12 +59,12 @@ KGLGE::Triangle* Square::getIndicies(unsigned int offset)
 	return m_Triangles;
 }
 
-bool Square::respondToKey(unsigned int key)
+bool KGLGE::Square::respondToKey(unsigned int key)
 {
 	return false;
 }
 
-unsigned int Square::getNumTriangles()
+unsigned int KGLGE::Square::getNumTriangles()
 {
 	return 2;
 }

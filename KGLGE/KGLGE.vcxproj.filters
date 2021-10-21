@@ -111,7 +111,7 @@
       <Filter>Source Files\GameObjects</Filter>
     </ClCompile>
     <ClCompile Include="Square.cpp">
-      <Filter>Source Files\GameEngine</Filter>
+      <Filter>Source Files\GameObjects</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

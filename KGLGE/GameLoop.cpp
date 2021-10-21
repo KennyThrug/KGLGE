@@ -117,6 +117,19 @@ double KGLGE::GameLoop::getTimeSinceProgramStart()
 	return glfwGetTime() - timeProgramStarted;
 }
 
+bool KGLGE::GameLoop::checkCollision(int indexOneLayer, int indexOne, int indexTwoLayer, int indexTwo, float xDiff, float yDiff)
+{
+	GameObject* one = getGameObject(indexOneLayer, indexOne);
+	GameObject * two = getGameObject(indexTwoLayer, indexTwo);
+	bool collisionX = (one->getX() + xDiff) + one->getWidth() >= two->getX() &&
+		two->getX() + two->getWidth() >= (one->getX() + xDiff);
+
+	bool collisionY = (one->getY() + yDiff) + one->getHeight() >= two->getY() &&
+		two->getY() + two->getHeight() >= one->getY() + yDiff;
+
+	return collisionX && collisionY;
+}
+
 void KGLGE::GameLoop::updateTime()
 {
 	double currentTime = glfwGetTime();

@@ -17,10 +17,6 @@ namespace KGLGE {
 		virtual unsigned int getNumTriangles() override;
 		virtual bool respondToKey(unsigned int key) override;
 		void resetTextures();
-		float m_x;
-		float m_y;
-		float m_Width;
-		float m_Height;
 	private:
 		KGLGE::Vertex m_vertex[4];
 		KGLGE::Triangle m_Triangles[2];
