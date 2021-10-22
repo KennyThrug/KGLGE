@@ -73,7 +73,7 @@ void KGLGE::GameLoop::startLoop()
 unsigned int KGLGE::GameLoop::addGameObject(GameObject* obj,unsigned int layer)
 {
 	if (stk[layer].empty()) {
-		gameObjects[layer][m_numGameObjects[layer]] = obj;
+		gameObjects[layer].push_back(obj);
 		m_numGameObjects[layer]++;
 		return m_numGameObjects[layer] - 1;
 	}

@@ -9,10 +9,11 @@
 
 namespace KGLGE {
 #define KGLGE_BACKGROUND 0
-#define KGLGE_MAIN 1
-#define KGLGE_FOREGROUND 2
-#define KGLGE_HUD 3
-#define KGLGE_FONT 4
+#define KGLGE_LEVEL 1
+#define KGLGE_MAIN 2
+#define KGLGE_FOREGROUND 3
+#define KGLGE_HUD 4
+#define KGLGE_FONT 5
 	class ShaderProgram
 	{
 	public:
