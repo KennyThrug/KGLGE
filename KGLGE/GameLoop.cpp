@@ -15,54 +15,57 @@ void KGLGE::GameLoop::update() {
 
 void KGLGE::GameLoop::startLoop()
 {
+	framesPerSecond = 60;
 	//TextureAtlas atlas("res/sprites/cats/",3);
 
 	Batcher batcher(&shader);
 
 	while (!p_Window->shouldClose()) {
-		//Clean up from old stuff
-		batcher.resetCounters();
-		p_Window->clearWindow(r, g, b, a);
-
 		updateTime();
+		if (nextFrame) {
+			//Clean up from old stuff
+			batcher.resetCounters();
+			p_Window->clearWindow(r, g, b, a);
 
-		//Poll Events
-		p_Window->pollEvents();
+			//Poll Events
+			p_Window->pollEvents();
 
 
-		//Key Handlers
-		for (int i = 0; i < handlers.size(); i++) {
-			if(p_Window->getKey(handlers[i].key,handlers[i].pressOnce))
-				gameObjects[handlers[i].layer][handlers[i].num]->respondToKey(handlers[i].key);
-		}
+			//Key Handlers
+			for (int i = 0; i < handlers.size(); i++) {
+				if (p_Window->getKey(handlers[i].key, handlers[i].pressOnce))
+					gameObjects[handlers[i].layer][handlers[i].num]->respondToKey(handlers[i].key);
+			}
 
-		
-		//Loop through all the gameObjects
-		for (int i = 0; i < 3; i++) {
-			char numGameObjectsLeft = m_numGameObjects[i];
-			for (int j = 0; j < 4096 && numGameObjectsLeft != 0; j++) {
-				if (gameObjects[i][j] != nullptr && !gameObjects[i][j]->deleted) {
-					//Updates
-					gameObjects[i][j]->update();
-					if (allObjectsRerender || gameObjects[i][j]->shouldUpdate) {
-						//Set Rendering
-						gameObjects[i][j]->shouldUpdate = false;
-						batcher.setValues(gameObjects[i][j]->getVertexes(), gameObjects[i][j]->getNumVertex(), gameObjects[i][j]->getIndicies(batcher.getVertexPointer()), gameObjects[i][j]->getNumTriangles());
+
+			//Loop through all the gameObjects
+			for (int i = 0; i < 3; i++) {
+				char numGameObjectsLeft = m_numGameObjects[i];
+				for (int j = 0; j < 4096 && numGameObjectsLeft != 0; j++) {
+					if (gameObjects[i][j] != nullptr && !gameObjects[i][j]->deleted) {
+						//Updates
+						gameObjects[i][j]->update();
+						if (allObjectsRerender || gameObjects[i][j]->shouldUpdate) {
+							//Set Rendering
+							gameObjects[i][j]->shouldUpdate = false;
+							batcher.setValues(gameObjects[i][j]->getVertexes(), gameObjects[i][j]->getNumVertex(), gameObjects[i][j]->getIndicies(batcher.getVertexPointer()), gameObjects[i][j]->getNumTriangles());
+						}
+						batcher.increaseCounter(gameObjects[i][j]->getNumVertex());
+						batcher.increaseIndex(gameObjects[i][j]->getNumTriangles());
+						numGameObjectsLeft--;
 					}
-					batcher.increaseCounter(gameObjects[i][j]->getNumVertex());
-					batcher.increaseIndex(gameObjects[i][j]->getNumTriangles());
-					numGameObjectsLeft--;
 				}
 			}
+			allObjectsRerender = false;
+			batcher.paint();
+
+			//Main Update Loop
+			update();
+
+			//Ending Loop Cleanup
+			p_Window->swapBuffers();
+			nextFrame = false;
 		}
-		allObjectsRerender = false;
-		batcher.paint();
-
-		//Main Update Loop
-		update();
-
-		//Ending Loop Cleanup
-		p_Window->swapBuffers();
 	}
 	return;
 }
@@ -102,9 +105,19 @@ void KGLGE::GameLoop::setAllObjectsToRedraw()
 	allObjectsRerender = true;
 }
 
-int KGLGE::GameLoop::getFPS()
+int KGLGE::GameLoop::getActualFPS()
 {
 	return FPS;
+}
+
+int KGLGE::GameLoop::getFPS()
+{
+	return framesPerSecond;
+}
+
+void KGLGE::GameLoop::setFPS(int framesPerSec)
+{
+	framesPerSecond = framesPerSec;
 }
 
 int KGLGE::GameLoop::getNumTicks()
@@ -134,9 +147,10 @@ void KGLGE::GameLoop::updateTime()
 {
 	double currentTime = glfwGetTime();
 	ticks++;
-	if (currentTime - prevTime >= 1.0) {
-		FPS = ticks;
+	if (currentTime - prevTime >= (1.0 / framesPerSecond)) {
+		nextFrame = true;
+		FPS = (ticks * 30);
 		ticks = 0;
-		prevTime += 1.0;
+		prevTime += (1.0 / 60);
 	}
 }

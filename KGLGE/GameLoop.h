@@ -53,8 +53,16 @@ namespace KGLGE {
 		void setAllObjectsToRedraw();
 		Window* getWin() { return p_Window; }
 		GameObject* getGameObject(int layer, int num) { return gameObjects[layer][num]; }
+		/// <summary>
+		/// Gets actual FPS of the computer
+		/// </summary>
+		/// <returns></returns>
+		int getActualFPS();
 		int getFPS();
+		void setFPS(int framesPerSec);
+		int framesPerSecond;
 		int getNumTicks();
+		bool nextFrame = false;
 		/// <summary>
 		/// Returns Time, in seconds that the program has been running
 		/// </summary>
