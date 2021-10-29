@@ -36,6 +36,9 @@ void KGLGE::Square::update()
 	m_vertex[1].position = { m_x + m_Width,m_y };
 	m_vertex[2].position = { m_x + m_Width, m_y + m_Height };
 	m_vertex[3].position = { m_x,m_y + m_Height };
+	int k = allGameObjects->getNumGameObjects(0);
+	int d = allGameObjects->getNumGameObjects(1);
+	int a = allGameObjects->getNumGameObjects(2);
 }
 
 KGLGE::Vertex* KGLGE::Square::getVertexes()

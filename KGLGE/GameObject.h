@@ -58,6 +58,7 @@ namespace KGLGE {
 		/// </summary>
 		/// <returns>Number of Indicies that are returned with getIndicies</returns>
 		virtual unsigned int getNumTriangles() = 0;
+		void setAllGameObjects(AllGameObjects* all) { allGameObjects = all; }
 	protected:
 		AllGameObjects* allGameObjects;
 	};
