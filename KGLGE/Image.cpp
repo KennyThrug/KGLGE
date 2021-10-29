@@ -1,8 +1,13 @@
 #include "Image.h"
 
 KGLGE::Image::Image(float x, float y, float width, float height, std::string fileName, unsigned int texSlot)
-	:m_x(x), m_y(y), m_Width(width), m_Height(height), GameObject()
+	: GameObject()
 {
+	m_x = x;
+	m_y = y;
+	m_Height = height;
+	m_Width = width;
+
 	KGLGE::loadTexture(fileName, texSlot);
 	m_vertex[0].texPos = { 0,0 };
 	m_vertex[1].texPos = { 1,0 };
@@ -58,3 +63,4 @@ void KGLGE::Image::resetTextures()
 	m_vertex[2].position = { m_x + m_Width, m_y + m_Height };
 	m_vertex[3].position = { m_x,m_y + m_Height };
 }
+

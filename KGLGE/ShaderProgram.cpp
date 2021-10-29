@@ -67,8 +67,11 @@ void KGLGE::ShaderProgram::setupSamplers()
 
 void KGLGE::ShaderProgram::setWindowSize(float x_min, float x_max, float y_min, float y_max)
 {
-	float winSize[4] = { x_min,x_max,y_min,y_max };
-	glUniform1fv(glGetUniformLocation(program, "u_windowSize"), 4, winSize);
+	glUseProgram(program);
+	glUniform1f(glGetUniformLocation(program, "u_x_min"), x_min);
+	glUniform1f(glGetUniformLocation(program, "u_x_max"), x_max);
+	glUniform1f(glGetUniformLocation(program, "u_y_min"), y_min);
+	glUniform1f(glGetUniformLocation(program, "u_y_max"), y_max);
 }
 
 void KGLGE::ShaderProgram::usePrograms(const std::string VertexShaderFileName, const std::string FragmentShaderFileName)

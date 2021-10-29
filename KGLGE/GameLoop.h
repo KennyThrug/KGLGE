@@ -3,18 +3,18 @@
 #include "Batcher.h"
 #include "ShaderProgram.h"
 #include "TextureAtlas.h"
-#include "Time.hpp"
-#include <stack>
+#include "Square.h"
 
 namespace KGLGE {
-
-
 
 	class GameLoop
 	{
 	public:
+		float aa = 0;
+		float bb = 0;
 		virtual void update();
-		GameLoop(Window* win) : p_Window(win) { 
+		GameLoop(Window* win) : p_Window(win) {
+			allGameObjects = new AllGameObjects();
 			shader.init();
 			setWindowSize(-1, 1, -1, 1);
 		}
@@ -38,28 +38,51 @@ namespace KGLGE {
 		/// <returns>the index of the object, will be the same thing as index</returns>
 		void setWindowSize(float min_x,float max_x, float min_y, float max_y) {
 			shader.setWindowSize(min_x, max_x, min_y, max_y);
+			setAllObjectsToRedraw();
 		}
 		/// <summary>
 		/// removes a game object and allows that memory to be used
 		/// </summary>
 		/// <param name="index"></param>
 		void removeGameObject(unsigned int layer, unsigned int index);
-		void addKeyHandler(unsigned int layer, unsigned int index,unsigned int key);
+		void addKeyHandler(unsigned int layer, unsigned int index,unsigned int key,bool pressOnce = false);
 		//Unimplemented
 		void removeTexture(unsigned int index);
+		void setAllObjectsToRedraw();
 		Window* getWin() { return p_Window; }
-		GameObject* getGameObject(int layer, int num) { return gameObjects[layer][num]; }
+		GameObject* getGameObject(int layer, int num) { return allGameObjects->getGameObject(layer, num); }
+		/// <summary>
+		/// Gets actual FPS of the computer
+		/// </summary>
+		/// <returns></returns>
+		int getActualFPS();
+		int getFPS();
+		void setFPS(int framesPerSec);
+		int framesPerSecond;
+		int getNumTicks();
+		bool nextFrame = false;
+		/// <summary>
+		/// Returns Time, in seconds that the program has been running
+		/// </summary>
+		/// <returns></returns>
+		double getTimeSinceProgramStart();
+		bool checkCollision(int indexOneLayer, int indexOne, int indexTwoLayer, int indexTwo,float xDiff = 0, float yDiff = 0);
 	protected:
+		AllGameObjects* allGameObjects;
 		float r, g, b, a;
-		GameObject* gameObjects[3][32];
-		unsigned char m_numGameObjects[3];
 	private:
+		int ticks;
+		double timeProgramStarted = glfwGetTime();
+		double prevTime = glfwGetTime();
+		int FPS = 0;
+		void updateTime();
+		bool allObjectsRerender = false;
 		struct KeyHandler {
 			unsigned int key;
 			unsigned int layer;
 			unsigned int num;
+			bool pressOnce;
 		};
-		std::stack<int> stk[3];
 		Window* p_Window;
 		std::vector<KeyHandler> handlers;
 		ShaderProgram shader;
