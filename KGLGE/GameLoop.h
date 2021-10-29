@@ -3,12 +3,9 @@
 #include "Batcher.h"
 #include "ShaderProgram.h"
 #include "TextureAtlas.h"
-#include <stack>
 #include "Square.h"
 
 namespace KGLGE {
-
-
 
 	class GameLoop
 	{
@@ -16,7 +13,8 @@ namespace KGLGE {
 		float aa = 0;
 		float bb = 0;
 		virtual void update();
-		GameLoop(Window* win) : p_Window(win) { 
+		GameLoop(Window* win) : p_Window(win) {
+			allGameObjects = new AllGameObjects();
 			shader.init();
 			setWindowSize(-1, 1, -1, 1);
 		}
@@ -52,7 +50,7 @@ namespace KGLGE {
 		void removeTexture(unsigned int index);
 		void setAllObjectsToRedraw();
 		Window* getWin() { return p_Window; }
-		GameObject* getGameObject(int layer, int num) { return gameObjects[layer][num]; }
+		GameObject* getGameObject(int layer, int num) { return allGameObjects->getGameObject(layer, num); }
 		/// <summary>
 		/// Gets actual FPS of the computer
 		/// </summary>
@@ -70,9 +68,8 @@ namespace KGLGE {
 		double getTimeSinceProgramStart();
 		bool checkCollision(int indexOneLayer, int indexOne, int indexTwoLayer, int indexTwo,float xDiff = 0, float yDiff = 0);
 	protected:
+		AllGameObjects* allGameObjects;
 		float r, g, b, a;
-		std::array<std::vector<GameObject*>,6> gameObjects;
-		unsigned char m_numGameObjects[3];
 	private:
 		int ticks;
 		double timeProgramStarted = glfwGetTime();
@@ -86,7 +83,6 @@ namespace KGLGE {
 			unsigned int num;
 			bool pressOnce;
 		};
-		std::stack<int> stk[3];
 		Window* p_Window;
 		std::vector<KeyHandler> handlers;
 		ShaderProgram shader;

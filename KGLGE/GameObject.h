@@ -1,6 +1,9 @@
 #pragma once
 #include "Math.hpp"
+#include <stack>
+#include <vector>
 namespace KGLGE {
+	class AllGameObjects;
 	struct Vertex {
 		Position position;
 		Position texPos;
@@ -55,5 +58,48 @@ namespace KGLGE {
 		/// </summary>
 		/// <returns>Number of Indicies that are returned with getIndicies</returns>
 		virtual unsigned int getNumTriangles() = 0;
+	protected:
+		AllGameObjects* allGameObjects;
+	};
+
+	class AllGameObjects {
+		struct GameObjectLocation {
+			int layer;
+			int location;
+		};
+	public:
+		unsigned int addGameObject(GameObject* obj, unsigned int layer) {
+			if (stk[layer].empty()) {
+				gameObjects[layer].push_back(obj);
+				m_numGameObjects[layer]++;
+				return m_numGameObjects[layer] - 1;
+			}
+			else {
+				int re = stk[layer].top();
+				delete gameObjects[layer][re];
+				gameObjects[layer][re] = obj;
+				stk[layer].pop();
+				m_numGameObjects[layer]++;
+				return re;
+			}
+			return 0;
+		}
+		void removeGameObject(unsigned int layer, unsigned int index) {
+			gameObjects[layer][index]->deleted = true;
+			stk[layer].push(index);
+			m_numGameObjects[layer]--;
+		}
+		GameObject* getGameObject(int layer, int location) {
+			return gameObjects[layer][location];
+		}
+		unsigned int getNumGameObjects(int layer) {
+			return m_numGameObjects[layer];
+		}
+	private:
+		std::stack<int> stk[6];
+
+	protected:
+		std::array<std::vector<GameObject*>, 6> gameObjects;
+		unsigned char m_numGameObjects[6];
 	};
 }

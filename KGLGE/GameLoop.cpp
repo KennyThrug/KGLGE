@@ -1,22 +1,11 @@
 #include "GameLoop.h"
 void KGLGE::GameLoop::update() {
-	getWin()->getKey(GLFW_KEY_A, true);
-	getWin()->getKey(GLFW_KEY_B, true);
-	getWin()->getKey(GLFW_KEY_C);
-	if (getWin()->getKey(GLFW_KEY_SPACE, true)) {
-		removeGameObject(KGLGE_MAIN, 0);
-	}
-	if (getWin()->getKey(GLFW_KEY_P, true)) {
-		Square* sq = new Square(-1, -1, 2, 2, 1, 1, 0, 1);
-		addGameObject(sq, KGLGE_MAIN);
-		allObjectsRerender = true;
-	}
 }
 
 void KGLGE::GameLoop::startLoop()
 {
-	framesPerSecond = 60;
-	//TextureAtlas atlas("res/sprites/cats/",3);
+	if(framesPerSecond == 0)
+		framesPerSecond = 60;
 
 	Batcher batcher(&shader);
 
@@ -34,24 +23,24 @@ void KGLGE::GameLoop::startLoop()
 			//Key Handlers
 			for (int i = 0; i < handlers.size(); i++) {
 				if (p_Window->getKey(handlers[i].key, handlers[i].pressOnce))
-					gameObjects[handlers[i].layer][handlers[i].num]->respondToKey(handlers[i].key);
+					getGameObject(handlers[i].layer,handlers[i].num)->respondToKey(handlers[i].key);
 			}
 
 
 			//Loop through all the gameObjects
-			for (int i = 0; i < 3; i++) {
-				char numGameObjectsLeft = m_numGameObjects[i];
+			for (int i = 0; i < 6; i++) {
+				char numGameObjectsLeft = allGameObjects->getNumGameObjects(i);
 				for (int j = 0; j < 4096 && numGameObjectsLeft != 0; j++) {
-					if (gameObjects[i][j] != nullptr && !gameObjects[i][j]->deleted) {
+					if (getGameObject(i,j) != nullptr && !getGameObject(i,j)->deleted) {
 						//Updates
-						gameObjects[i][j]->update();
-						if (allObjectsRerender || gameObjects[i][j]->shouldUpdate) {
+						getGameObject(i,j)->update();
+						if (allObjectsRerender || getGameObject(i,j)->shouldUpdate) {
 							//Set Rendering
-							gameObjects[i][j]->shouldUpdate = false;
-							batcher.setValues(gameObjects[i][j]->getVertexes(), gameObjects[i][j]->getNumVertex(), gameObjects[i][j]->getIndicies(batcher.getVertexPointer()), gameObjects[i][j]->getNumTriangles());
+							getGameObject(i,j)->shouldUpdate = false;
+							batcher.setValues(getGameObject(i,j)->getVertexes(), getGameObject(i,j)->getNumVertex(), getGameObject(i,j)->getIndicies(batcher.getVertexPointer()), getGameObject(i,j)->getNumTriangles());
 						}
-						batcher.increaseCounter(gameObjects[i][j]->getNumVertex());
-						batcher.increaseIndex(gameObjects[i][j]->getNumTriangles());
+						batcher.increaseCounter(getGameObject(i,j)->getNumVertex());
+						batcher.increaseIndex(getGameObject(i,j)->getNumTriangles());
 						numGameObjectsLeft--;
 					}
 				}
@@ -72,27 +61,12 @@ void KGLGE::GameLoop::startLoop()
 
 unsigned int KGLGE::GameLoop::addGameObject(GameObject* obj,unsigned int layer)
 {
-	if (stk[layer].empty()) {
-		gameObjects[layer].push_back(obj);
-		m_numGameObjects[layer]++;
-		return m_numGameObjects[layer] - 1;
-	}
-	else {
-		int re = stk[layer].top();
-		delete gameObjects[layer][re];
-		gameObjects[layer][re] = obj;
-		stk[layer].pop();
-		m_numGameObjects[layer]++;
-		return re;
-	}
-	return 0;
+	return allGameObjects->addGameObject(obj, layer);
 }
 
 void KGLGE::GameLoop::removeGameObject(unsigned int layer,unsigned int index)
 {
-	gameObjects[layer][index]->deleted = true;
-	stk[layer].push(index);
-	m_numGameObjects[layer]--;
+	allGameObjects->removeGameObject(layer, index);
 }
 
 void KGLGE::GameLoop::addKeyHandler(unsigned int layer, unsigned int index, unsigned int key,bool pressOnce)
