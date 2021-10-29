@@ -4,6 +4,7 @@
 #include "ShaderProgram.h"
 #include "TextureAtlas.h"
 #include "Square.h"
+#include "LevelLoader.h"
 
 namespace KGLGE {
 
@@ -29,7 +30,7 @@ namespace KGLGE {
 		/// <param name="obj">The object you want to add</param>
 		/// <param name="layer"> layer of the object, options are KGLGE_Background, KGLGE_Foreground, and KGLGE_MainGround
 		/// <returns>The index of the object, keep if you want to access it later</returns>
-		unsigned int addGameObject(GameObject* obj,unsigned int layer);
+		GameObjectLocation addGameObject(GameObject* obj,unsigned int layer);
 		/// <summary>
 		/// Sets a gameObject to a specific index. Will override that object. Use if you want it to replace that index.
 		/// </summary>
@@ -67,6 +68,15 @@ namespace KGLGE {
 		/// <returns></returns>
 		double getTimeSinceProgramStart();
 		bool checkCollision(int indexOneLayer, int indexOne, int indexTwoLayer, int indexTwo,float xDiff = 0, float yDiff = 0);
+	
+		void addProperty(GameObjectLocation loc, int prop) {
+			allGameObjects->addProperty(loc, prop);
+		}
+		void addProperty(int layer, int loc, int prop) {
+			allGameObjects->addProperty(layer, loc, prop);
+		}
+
+		void LoadLevel(Level* lvl);
 	protected:
 		AllGameObjects* allGameObjects;
 		float r, g, b, a;

@@ -18,6 +18,18 @@ namespace KGLGE {
 	class GameObject
 	{
 	public:
+		void addProperty(int prop) {
+			properties.push_back(prop);
+		}
+		bool removeProperty(int prop) {
+			for (int i = 0; i < properties.size(); i++) {
+				if (properties[i] == prop) {
+					properties.erase(i + properties.begin());
+					return true;
+				}
+			}
+			return false;
+		}
 		bool shouldUpdate;
 		//Generally don't manually delete this. It will probably be bad. instead use loop.removeGameObject
 		bool deleted = false;
@@ -59,21 +71,24 @@ namespace KGLGE {
 		/// <returns>Number of Indicies that are returned with getIndicies</returns>
 		virtual unsigned int getNumTriangles() = 0;
 		void setAllGameObjects(AllGameObjects* all) { allGameObjects = all; }
+		std::vector<int> properties;
 	protected:
 		AllGameObjects* allGameObjects;
 	};
 
+
+	struct GameObjectLocation {
+		int layer;
+		int location;
+	};
 	class AllGameObjects {
-		struct GameObjectLocation {
-			int layer;
-			int location;
-		};
+
 	public:
-		unsigned int addGameObject(GameObject* obj, unsigned int layer) {
+		GameObjectLocation addGameObject(GameObject* obj, unsigned int layer) {
 			if (stk[layer].empty()) {
 				gameObjects[layer].push_back(obj);
 				m_numGameObjects[layer]++;
-				return m_numGameObjects[layer] - 1;
+				return { (int)layer, m_numGameObjects[layer] - 1 };
 			}
 			else {
 				int re = stk[layer].top();
@@ -81,9 +96,9 @@ namespace KGLGE {
 				gameObjects[layer][re] = obj;
 				stk[layer].pop();
 				m_numGameObjects[layer]++;
-				return re;
+				return { (int)layer, re };
 			}
-			return 0;
+			return {-1,-1};
 		}
 		void removeGameObject(unsigned int layer, unsigned int index) {
 			gameObjects[layer][index]->deleted = true;
@@ -93,12 +108,40 @@ namespace KGLGE {
 		GameObject* getGameObject(int layer, int location) {
 			return gameObjects[layer][location];
 		}
+		GameObject* getGameObject(GameObjectLocation location) {
+			return getGameObject(location.layer, location.location);
+		}
 		unsigned int getNumGameObjects(int layer) {
 			return m_numGameObjects[layer];
 		}
+		void addProperty(GameObjectLocation location, int prop) {
+			getGameObject(location)->addProperty(prop);
+			for (int i = 0; i < properties.size(); i++) {
+				if (propertykey[i] == prop) {
+					properties[i].push_back(location);
+					return;
+				}
+			}
+			std::vector<GameObjectLocation> temp;
+			propertykey.push_back(prop);
+			temp.push_back(location);
+			properties.push_back(temp);
+		}
+		void addProperty(int layer, int location, int prop) {
+			addProperty({ layer,location }, prop);
+		}
+		std::vector<GameObjectLocation> getAllObjectsWithProperty(int prop) {
+			for (int i = 0; i < propertykey.size(); i++) {
+				if (propertykey[i] == prop) {
+					return properties[i];
+				}
+			}
+			return std::vector<GameObjectLocation>();
+		}
 	private:
 		std::stack<int> stk[6];
-
+		std::vector<int> propertykey;
+		std::vector<std::vector<GameObjectLocation>> properties;
 	protected:
 		std::array<std::vector<GameObject*>, 6> gameObjects;
 		unsigned char m_numGameObjects[6];

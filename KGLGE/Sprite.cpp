@@ -63,5 +63,16 @@ unsigned int KGLGE::Sprite::getNumTriangles()
 
 bool KGLGE::Sprite::respondToKey(unsigned int key)
 {
+	if (key == GLFW_KEY_W) {
+		m_x += 0.01;
+		shouldUpdate = true;
+	}
+	if (key == GLFW_KEY_S) {
+		std::vector<GameObjectLocation> sq = allGameObjects->getAllObjectsWithProperty(1);
+		for (int i = 0; i < sq.size(); i++) {
+			allGameObjects->getGameObject(sq[i])->m_x += 0.01;
+			allGameObjects->getGameObject(sq[i])->shouldUpdate = true;
+		}
+	}
 	return false;
 }

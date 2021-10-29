@@ -172,7 +172,7 @@
     <ClInclude Include="GameLoop.h" />
     <ClInclude Include="GameObject.h" />
     <ClInclude Include="Image.h" />
-    <ClInclude Include="Level.h" />
+    <ClInclude Include="LevelLoader.h" />
     <ClInclude Include="Math.hpp" />
     <ClInclude Include="Runner.h" />
     <ClInclude Include="ShaderProgram.h" />
@@ -185,7 +185,7 @@
     <ClCompile Include="Batcher.cpp" />
     <ClCompile Include="GameLoop.cpp" />
     <ClCompile Include="Image.cpp" />
-    <ClCompile Include="Level.cpp" />
+    <ClCompile Include="LevelLoader.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="ShaderProgram.cpp" />
     <ClCompile Include="Sprite.cpp" />

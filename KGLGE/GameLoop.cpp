@@ -59,7 +59,7 @@ void KGLGE::GameLoop::startLoop()
 	return;
 }
 
-unsigned int KGLGE::GameLoop::addGameObject(GameObject* obj,unsigned int layer)
+KGLGE::GameObjectLocation KGLGE::GameLoop::addGameObject(GameObject* obj,unsigned int layer)
 {
 	obj->setAllGameObjects(allGameObjects);
 	return allGameObjects->addGameObject(obj, layer);
