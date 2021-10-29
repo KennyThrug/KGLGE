@@ -4,3 +4,6 @@
 /Dependencies
 /KGLGE/x64
 *.png
+*.lib
+*.idb
+*.pdb
