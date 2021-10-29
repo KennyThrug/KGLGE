@@ -21,6 +21,7 @@ KGLGE::Window::Window(int width, int height, const char* name)
 		glfwTerminate();
 		throw "Failed to create GLFW Window";
 	}
+
 }
 
 KGLGE::Window::Window(const char* name)
@@ -43,6 +44,10 @@ void KGLGE::Window::display()
 	if (glewInit()) {
 		throw "Failed to initialize GLEW INIT";
 	}
+	for (int i = 0; i < 64; i++) {
+		lastFrameValue[0][i] = -1;
+		lastFrameValue[1][i] = -1;
+	}
 }
 
 bool KGLGE::Window::shouldClose()
@@ -64,12 +69,44 @@ void KGLGE::Window::clearWindow(float r, float g, float b, float a)
 void KGLGE::Window::pollEvents()
 {
 	glfwPollEvents();
+
+	unsigned int count = 0;
+	while(count < 32 && lastFrameValue[(One ? 1 : 0)][count] != -1) {
+		lastFrameValue[(One ? 1 : 0)][count] = -1;
+		count++;
+	}
+	curNum = 0;
+	One = !One;
 }
 
-bool KGLGE::Window::getKey(unsigned int key)
+bool KGLGE::Window::getKey(unsigned int key,bool pressOnce)
 {
-	return glfwGetKey(window, key);
+	if (!glfwGetKey(window, key))
+		return false;
+	lastFrameValue[One ? 0 : 1][curNum] = key;
+	curNum++;
+	if (!pressOnce)
+		return true;
+	return !checkIfUsedLastFrame(key, One ? 1 : 0);
 }
-bool KGLGE::Window::getMouseButton(unsigned int button) {
-	return glfwGetMouseButton(window,button);
+
+bool KGLGE::Window::getMouseButton(unsigned int button,bool pressOnce) {
+	if (!glfwGetMouseButton(window, button))
+		return false;
+	lastFrameValue[One ? 0 : 1][curNum] = button;
+	curNum++;
+	if (!pressOnce)
+		return true;
+	return !checkIfUsedLastFrame(button, One ? 1 : 0);
+}
+
+bool KGLGE::Window::checkIfUsedLastFrame(int key, int frame)
+{
+	int i = 0;
+	while (lastFrameValue[frame][i] != -1 && i <= 64) {
+		if (lastFrameValue[frame][i] == key)
+			return true;
+		i++;
+	}
+	return false;
 }

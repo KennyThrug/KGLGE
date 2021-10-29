@@ -44,7 +44,6 @@ KGLGE::TextureAtlas::~TextureAtlas()
 	for (int i = 0; i < loadedTextures.size(); i++) {
 		delete loadedTextures[i];
 	}
-	delete& loadedTextures;
 }
 
 std::array<KGLGE::Position, 4> KGLGE::TextureAtlas::getPositionsOf(const std::string& fileName)
