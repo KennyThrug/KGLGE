@@ -77,10 +77,16 @@ namespace KGLGE {
 		}
 
 		void LoadLevel(Level* lvl);
+		unsigned int addTextureAtlas(KGLGE::TextureAtlas* atlas);
+		unsigned int addTextureAtlas(std::string filePath, unsigned int layer);
+		KGLGE::TextureAtlas *getAtlas(int index);
+		void removeAllTextureAtlas();
+		void removeTextureAtlas(int index);
 	protected:
 		AllGameObjects* allGameObjects;
 		float r, g, b, a;
 	private:
+		std::vector<TextureAtlas*> atlas;
 		int ticks;
 		double timeProgramStarted = glfwGetTime();
 		double prevTime = glfwGetTime();

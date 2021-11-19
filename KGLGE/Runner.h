@@ -11,17 +11,15 @@
 		win.display();
 		KGLGE::GameLoop loop(&win);
 
-		/*
-		std::string catz = "res/sprites/CATS/";
-		KGLGE::TextureAtlas cats(catz, KGLGE_BACKGROUND);
+		unsigned int cats = loop.addTextureAtlas("res/sprites/CATS/", KGLGE_BACKGROUND);
 
-		KGLGE::Sprite sp(&cats, 0, 0, 1, 1, "rowlett.png", 2);
+		KGLGE::Sprite sp(loop.getAtlas(cats), 0, 0, 1, 1, "rowlett.png", 2);
 		unsigned int xx = loop.addGameObject(&sp, 1).location;
 
-		KGLGE::Sprite kp(&cats, -1, -1, 0.5f, 0.5f, "X.png");
+		KGLGE::Sprite kp(loop.getAtlas(cats), -1, -1, 0.5f, 0.5f, "X.png");
 		loop.addGameObject(&kp, 1);
 
-		KGLGE::Sprite nora(&cats, -0.5, 0, 1, 1, "Nora.png");
+		KGLGE::Sprite nora(loop.getAtlas(cats), -0.5, 0, 1, 1, "Nora.png");
 		KGLGE::GameObjectLocation loc = loop.addGameObject(&nora, 0);
 		loop.addProperty(loc, 1);
 		
@@ -30,7 +28,7 @@
 		loop.addKeyHandler(1, xx, GLFW_KEY_S);
 		loop.addKeyHandler(1, xx, GLFW_KEY_A);
 		loop.addKeyHandler(1, xx, GLFW_KEY_D);
-		*/
+		
 		//loop.setWindowSize(-2, 2, -2, 2);
 
 		//KGLGE::Square sq(0, 0, 0.5f, 0.5f, 1, 1, 0, 1);

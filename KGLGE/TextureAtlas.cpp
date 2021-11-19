@@ -33,7 +33,7 @@ GLuint KGLGE::loadTexture(const std::string& fileName, unsigned char textureSlot
 }
 
 KGLGE::TextureAtlas::TextureAtlas(const std::string& folderPath, unsigned int layer)
-	:layer(layer)
+	:layer(layer), path(folderPath)
 {
 	KGLGE::loadTexture(folderPath + "texture.png",layer,&m_width,&m_height,&m_bpp);
 	readJSon(folderPath + "metadata.json");
@@ -49,12 +49,7 @@ KGLGE::TextureAtlas::~TextureAtlas()
 std::array<KGLGE::Position, 4> KGLGE::TextureAtlas::getPositionsOf(const std::string& fileName)
 {
 	std::array<KGLGE::Position, 4> arr{ { {0,0},{0,0},{0,0},{0,0} } };
-	for (int i = 0; i < loadedTextures.size(); i++) {
-		if (loadedTextures[i]->fileName == fileName) {
-			arr = getPositionsOf(i);
-			break;
-		}
-	}
+	arr = getPositionsOf(findIndexOf(fileName));
 	return arr;
 }
 
@@ -67,6 +62,15 @@ std::array<KGLGE::Position, 4> KGLGE::TextureAtlas::getPositionsOf(unsigned int 
 	arr[2] = { float(loadedTextures[index]->X_Position) + float(loadedTextures[index]->X_texSize), float(loadedTextures[index]->Y_Position) + float(loadedTextures[index]->Y_texSize) };
 	arr[3] = { float(loadedTextures[index]->X_Position), float(loadedTextures[index]->Y_Position) + float(loadedTextures[index]->Y_texSize) };
 	return arr;
+}
+
+int KGLGE::TextureAtlas::findIndexOf(const std::string& fileName)
+{
+	for (int i = 0; i < loadedTextures.size(); i++) {
+		if (loadedTextures[i]->fileName == fileName) {
+			return i;
+		}
+	}
 }
 
 void KGLGE::TextureAtlas::readJSon(const std::string& fileName)

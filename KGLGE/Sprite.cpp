@@ -55,6 +55,28 @@ KGLGE::Sprite::Sprite(TextureAtlas* atlas, float x, float y, float width, float 
 	m_vertex[3].texID = atlas->layer;
 }
 
+KGLGE::Sprite::Sprite(TextureAtlas* atlas, float x, float y, float width, float height, int fileIndex, unsigned int numRotations)
+	: GameObject()
+{
+
+	m_x = x;
+	m_y = y;
+	m_Height = height;
+	m_Width = width;
+
+	std::array<KGLGE::Position, 4> p = rotate90deg(atlas->getPositionsOf(fileIndex), numRotations);
+
+	m_vertex[0].texPos = p[0];
+	m_vertex[1].texPos = p[1];
+	m_vertex[2].texPos = p[2];
+	m_vertex[3].texPos = p[3];
+
+	m_vertex[0].texID = atlas->layer;
+	m_vertex[1].texID = atlas->layer;
+	m_vertex[2].texID = atlas->layer;
+	m_vertex[3].texID = atlas->layer;
+
+}
 void KGLGE::Sprite::update()
 {
 

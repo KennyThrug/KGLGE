@@ -9,6 +9,7 @@ namespace KGLGE {
 	class Sprite : public GameObject {
 	public:
 		Sprite(TextureAtlas* atlas,float x, float y, float width, float height,std::string fileName,unsigned int numRotations = 0);
+		Sprite(TextureAtlas* atlas, float x, float y, float width, float height, int fileNum, unsigned int numRotations = 0);
 		// Inherited via GameObject
 		virtual void update() override;
 		virtual Vertex* getVertexes() override;

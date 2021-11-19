@@ -129,6 +129,35 @@ void KGLGE::GameLoop::LoadLevel(Level* lvl)
 	}
 }
 
+unsigned int KGLGE::GameLoop::addTextureAtlas(KGLGE::TextureAtlas* atlas)
+{
+	this->atlas.push_back(atlas);
+	return this->atlas.size() - 1;
+}
+
+unsigned int KGLGE::GameLoop::addTextureAtlas(std::string filePath, unsigned int layer)
+{
+	TextureAtlas *a = new TextureAtlas(filePath, layer);
+	return addTextureAtlas(a);
+}
+
+KGLGE::TextureAtlas* KGLGE::GameLoop::getAtlas(int index)
+{
+	return atlas[index];
+}
+
+void KGLGE::GameLoop::removeAllTextureAtlas()
+{
+	for (int i = 0; i < atlas.size();i++) {
+		atlas.pop_back();
+	}
+}
+
+void KGLGE::GameLoop::removeTextureAtlas(int index)
+{
+	atlas.erase(atlas.begin() + index);
+}
+
 void KGLGE::GameLoop::updateTime()
 {
 	double currentTime = glfwGetTime();

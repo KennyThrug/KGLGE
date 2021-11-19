@@ -33,7 +33,9 @@ namespace KGLGE {
 		~TextureAtlas();
 		std::array<Position,4> getPositionsOf(const std::string& fileName);
 		std::array<Position, 4> getPositionsOf(unsigned int index);
+		int findIndexOf(const std::string& fileName);
 		unsigned int layer;
+		std::string path;
 	private:
 		void readJSon(const std::string& fileName);
 		void normalizeTexture(unsigned int index);

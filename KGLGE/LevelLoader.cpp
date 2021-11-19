@@ -2,17 +2,18 @@
 
 KGLGE::GameObject* KGLGE::Level::getGameObjectTypeFromID(KGLGE::Level::Body bd)
 {
+	//Puts all the data in an array thats easier to use
+	float temp[64];
+	for (int i = 0; i < bd.numParameters; i++) {
+		temp[i] = bd.parameters[i].data;
+	}
+
 	switch (bd.id) {
 	case 0: //Square
-		if (bd.numParameters == 8){
-			float temp[8];
-			for (int i = 0; i < bd.numParameters; i++) {
-				temp[i] = bd.parameters[i].data;
-			}
-			return new Square(temp[0], temp[1], temp[2], temp[3], temp[4], temp[5], temp[6], temp[7]);
-		}
+		return new Square(temp[0], temp[1], temp[2], temp[3], temp[4], temp[5], temp[6], temp[7]);
 		break;
 	case 1: //Sprite
+
 		break;
 	case 2: //image
 		break;
