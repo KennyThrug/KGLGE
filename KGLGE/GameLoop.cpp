@@ -1,5 +1,9 @@
 #include "GameLoop.h"
 void KGLGE::GameLoop::update() {
+	if (getWin()->getKey(GLFW_KEY_Y, true)) {
+		Level lvl = convertAllGameObjectsToLevel(allGameObjects);
+		saveLevel("Zinc.lvl", lvl);
+	}
 }
 
 void KGLGE::GameLoop::startLoop()
@@ -28,7 +32,7 @@ void KGLGE::GameLoop::startLoop()
 
 
 			//Loop through all the gameObjects
-			for (int i = 0; i < 6; i++) {
+			for (int i = 0; i < NumLayers; i++) {
 				char numGameObjectsLeft = allGameObjects->getNumGameObjects(i);
 				for (int j = 0; j < 4096 && numGameObjectsLeft != 0; j++) {
 					if (getGameObject(i,j) != nullptr && !getGameObject(i,j)->deleted) {
@@ -116,6 +120,13 @@ bool KGLGE::GameLoop::checkCollision(int indexOneLayer, int indexOne, int indexT
 		two->getY() + two->getHeight() >= one->getY() + yDiff;
 
 	return collisionX && collisionY;
+}
+
+void KGLGE::GameLoop::LoadLevel(Level* lvl)
+{
+	for (int i = 0; i < lvl->numObjects; i++) {
+		addGameObject(lvl->getGameObjectTypeFromID(lvl->body[i]),lvl->body[i].layer);
+	}
 }
 
 void KGLGE::GameLoop::updateTime()

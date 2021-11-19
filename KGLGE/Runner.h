@@ -3,19 +3,15 @@
 #include "Window.h"
 #include "Sprite.h"
 #include "TextureAtlas.h"
-	void uploop() {
-		std::cout << "leka";
-	}
 
 	void runProgram() {
 		KGLGE::Position pos = KGLGE::VectorToPosition({ 10,0.25f * KGLGE::PI });
-		std::cout << pos.x << std::endl;
-		std::cout << pos.y << std::endl;
 		KGLGE::initializeGLFW();
 		KGLGE::Window win(500, 500, "Game Window");
 		win.display();
 		KGLGE::GameLoop loop(&win);
 
+		/*
 		std::string catz = "res/sprites/CATS/";
 		KGLGE::TextureAtlas cats(catz, KGLGE_BACKGROUND);
 
@@ -34,9 +30,16 @@
 		loop.addKeyHandler(1, xx, GLFW_KEY_S);
 		loop.addKeyHandler(1, xx, GLFW_KEY_A);
 		loop.addKeyHandler(1, xx, GLFW_KEY_D);
-
+		*/
 		//loop.setWindowSize(-2, 2, -2, 2);
 
+		//KGLGE::Square sq(0, 0, 0.5f, 0.5f, 1, 1, 0, 1);
+		//loop.addGameObject(&sq, 1);
+		
+		KGLGE::Level* lvl = new KGLGE::Level;
+		KGLGE::loadLevel("Zinc.lvl", lvl);
+		loop.LoadLevel(lvl);
+		
 
 		loop.startLoop();
 		glfwTerminate();

@@ -7,6 +7,32 @@ void KGLGE::Sprite::resetTextures() {
 	m_vertex[3].position = { m_x,m_y + m_Height };
 }
 
+int KGLGE::Sprite::getGameObjectID()
+{
+	return 1;
+}
+
+float KGLGE::Sprite::getProperty(int propertyNum)
+{
+	return 0;
+}
+
+int KGLGE::Sprite::getPropertyID(int propertyNum)
+{
+	if (propertyNum == 0)
+		return 0;
+}
+
+int KGLGE::Sprite::getPropertySize(int propertyNum)
+{
+	return 0;
+}
+
+int KGLGE::Sprite::getNumProperties()
+{
+	return 0;
+}
+
 KGLGE::Sprite::Sprite(TextureAtlas* atlas, float x, float y, float width, float height,std::string fileName,unsigned int numRotations)
 	: GameObject()
 {

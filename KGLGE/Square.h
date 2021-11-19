@@ -1,5 +1,6 @@
 #pragma once
 #include "GameObject.h"
+#include <string>
 namespace KGLGE {
 	class Square : public KGLGE::GameObject {
 	public:
@@ -15,6 +16,18 @@ namespace KGLGE {
 	private:
 		KGLGE::Vertex m_vertex[4];
 		KGLGE::Triangle m_Triangles[2];
+
+
+		// Inherited via GameObject
+		virtual int getGameObjectID() override;
+
+		virtual float getProperty(int propertyNum) override;
+
+		virtual int getPropertyID(int propertyNum) override;
+
+		virtual int getPropertySize(int propertyNum) override;
+
+		virtual int getNumProperties() override;
 
 	};
 }

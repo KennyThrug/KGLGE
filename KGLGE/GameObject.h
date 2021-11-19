@@ -3,6 +3,10 @@
 #include <stack>
 #include <vector>
 namespace KGLGE {
+
+	//Number of layers total
+#define NumLayers 6
+
 	class AllGameObjects;
 	struct Vertex {
 		Position position;
@@ -55,6 +59,17 @@ namespace KGLGE {
 		/// <returns></returns>
 		virtual Triangle* getIndicies(unsigned int offset) = 0;
 		virtual bool respondToKey(unsigned int key) = 0;
+
+		virtual int getGameObjectID() = 0;
+		virtual float getProperty(int propertyNum) = 0;
+		virtual int getPropertyID(int propertyNum) = 0;
+		/// <summary>
+		/// Get Size of the data of the property in bytes
+		/// </summary>
+		/// <param name="propertyNum"></param>
+		/// <returns></returns>
+		virtual int getPropertySize(int propertyNum) = 0;
+		virtual int getNumProperties() = 0;
 
 		virtual float getX() { return m_x; }
 		virtual float getY() { return m_y; };
@@ -139,11 +154,11 @@ namespace KGLGE {
 			return std::vector<GameObjectLocation>();
 		}
 	private:
-		std::stack<int> stk[6];
+		std::stack<int> stk[NumLayers];
 		std::vector<int> propertykey;
 		std::vector<std::vector<GameObjectLocation>> properties;
 	protected:
-		std::array<std::vector<GameObject*>, 6> gameObjects;
-		unsigned char m_numGameObjects[6];
+		std::array<std::vector<GameObject*>, NumLayers> gameObjects;
+		unsigned char m_numGameObjects[NumLayers];
 	};
 }
