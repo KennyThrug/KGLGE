@@ -71,3 +71,54 @@ unsigned int KGLGE::Square::getNumTriangles()
 {
 	return 2;
 }
+
+int KGLGE::Square::getGameObjectID()
+{
+	return 0;
+}
+
+float KGLGE::Square::getProperty(int propertyNum)
+{
+	switch (propertyNum) {
+	case 0:
+		return m_x;
+		break;
+	case 1:
+		return m_y;
+		break;
+	case 2:
+		return m_Height;
+		break;
+	case 3:
+		return m_Width;
+		break;
+	case 4:
+		return m_vertex->red;
+		break;
+	case 5:
+		return m_vertex->green;
+		break;
+	case 6:
+		return m_vertex->blue;
+		break;
+	case 7:
+		return m_vertex->alpha;
+		break;
+	}
+	return 0;
+}
+
+int KGLGE::Square::getPropertyID(int propertyNum)
+{
+	return 3;
+}
+
+int KGLGE::Square::getPropertySize(int propertyNum)
+{
+	return sizeof(float);
+}
+
+int KGLGE::Square::getNumProperties()
+{
+	return 8;
+}

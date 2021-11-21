@@ -1,5 +1,9 @@
 #include "GameLoop.h"
 void KGLGE::GameLoop::update() {
+	if (getWin()->getKey(GLFW_KEY_Y, true)) {
+		Level lvl = convertAllGameObjectsToLevel(allGameObjects);
+		saveLevel("Zinc.lvl", lvl);
+	}
 }
 
 void KGLGE::GameLoop::startLoop()
@@ -21,14 +25,14 @@ void KGLGE::GameLoop::startLoop()
 
 
 			//Key Handlers
-			for (int i = 0; i < handlers.size(); i++) {
-				if (p_Window->getKey(handlers[i].key, handlers[i].pressOnce))
-					getGameObject(handlers[i].layer,handlers[i].num)->respondToKey(handlers[i].key);
+			for (int i = 0; i < allGameObjects->handlers.size(); i++) {
+				if (p_Window->getKey(allGameObjects->handlers[i].key, allGameObjects->handlers[i].pressOnce))
+					getGameObject(allGameObjects->handlers[i].layer, allGameObjects->handlers[i].num)->respondToKey(allGameObjects->handlers[i].key);
 			}
 
 
 			//Loop through all the gameObjects
-			for (int i = 0; i < 6; i++) {
+			for (int i = 0; i < NumLayers; i++) {
 				char numGameObjectsLeft = allGameObjects->getNumGameObjects(i);
 				for (int j = 0; j < 4096 && numGameObjectsLeft != 0; j++) {
 					if (getGameObject(i,j) != nullptr && !getGameObject(i,j)->deleted) {
@@ -59,7 +63,7 @@ void KGLGE::GameLoop::startLoop()
 	return;
 }
 
-unsigned int KGLGE::GameLoop::addGameObject(GameObject* obj,unsigned int layer)
+KGLGE::GameObjectLocation KGLGE::GameLoop::addGameObject(GameObject* obj,unsigned int layer)
 {
 	obj->setAllGameObjects(allGameObjects);
 	return allGameObjects->addGameObject(obj, layer);
@@ -72,7 +76,12 @@ void KGLGE::GameLoop::removeGameObject(unsigned int layer,unsigned int index)
 
 void KGLGE::GameLoop::addKeyHandler(unsigned int layer, unsigned int index, unsigned int key,bool pressOnce)
 {
-	handlers.push_back({ key,layer,index,pressOnce });
+	allGameObjects->handlers.push_back({ key,layer,index,pressOnce });
+}
+
+void KGLGE::GameLoop::addKeyHandler(GameObjectLocation location, unsigned int key, bool pressOnce)
+{
+	addKeyHandler(location.layer, location.location, key, pressOnce);
 }
 
 void KGLGE::GameLoop::setAllObjectsToRedraw()
@@ -116,6 +125,53 @@ bool KGLGE::GameLoop::checkCollision(int indexOneLayer, int indexOne, int indexT
 		two->getY() + two->getHeight() >= one->getY() + yDiff;
 
 	return collisionX && collisionY;
+}
+
+void KGLGE::GameLoop::LoadLevel(Level* lvl)
+{
+	for (int i = 0; i < lvl->numTextureAtlas; i++) {
+		addTextureAtlas(lvl->atlasNames[i],lvl->layer[i]);
+	}
+	for (int i = 0; i < lvl->numObjects; i++) {
+		addGameObject(getGameObjectTypeFromID(lvl->body[i]),lvl->body[i].layer);
+	}
+	for (int i = 0; i < lvl->numHandlers; i++) {
+		addKeyHandler(lvl->handlers[i].layer, lvl->handlers[i].num, lvl->handlers[i].key, lvl->handlers[i].pressOnce);
+	}
+	int count = -1;
+	int last = -1;
+	for (int i = 0; i < lvl->numProperties; i++) {
+		addProperty({ lvl->properties[i].layer, lvl->properties[i].location }, lvl->propertyKey[i]);
+	}
+}
+
+void KGLGE::GameLoop::addLevelCreator()
+{
+	GameObjectLocation loc = addGameObject(new LevelCreator(), 0);
+	addKeyHandler(loc,GLFW_KEY_RIGHT,true);
+}
+
+KGLGE::GameObject* KGLGE::GameLoop::getGameObjectTypeFromID(KGLGE::Level::Body bd)
+{
+	//Puts all the data in an array thats easier to use
+	float temp[64];
+	for (int i = 0; i < bd.numParameters; i++) {
+		temp[i] = bd.parameters[i].data;
+	}
+
+	switch (bd.id) {
+	case 0: //Square
+		return new Square(temp[0], temp[1], temp[2], temp[3], temp[4], temp[5], temp[6], temp[7]);
+		break;
+	case 1: //Sprite
+		return new Sprite(getAtlas(temp[0]),temp[1],temp[2],temp[3],temp[4],temp[5],temp[6]);
+		break;
+	case 2: //image
+		break;
+	case 3: //Empty
+		return new Empty();
+		break;
+	}
 }
 
 void KGLGE::GameLoop::updateTime()

@@ -15,8 +15,7 @@ namespace KGLGE {
 	/// <param name="textureSlot"></param>
 	/// <returns></returns>
 	GLuint loadTexture(const std::string& fileName, unsigned char textureSlot);
-	GLuint loadTexture(const std::string& fileName, unsigned char textureSlot,
-		int* width, int* height, int* bpp);
+	GLuint loadTexture(const std::string& fileName, unsigned char textureSlot, int* width, int* height, int* bpp);
 	class TextureAtlas {
 	public:
 		struct Texture {
@@ -29,12 +28,18 @@ namespace KGLGE {
 		/// <summary>
 		/// Creates a Texture atlas, makes the values needed for it, and loads it to the shader
 		/// </summary>
-		TextureAtlas(const std::string& folderPath,unsigned int layer);
+		TextureAtlas(const std::string& folderPath, unsigned int layer);
+		TextureAtlas(const std::string& folderPath, unsigned int layer,int index);
 		~TextureAtlas();
-		std::array<Position,4> getPositionsOf(const std::string& fileName);
+		std::array<Position, 4> getPositionsOf(const std::string& fileName);
 		std::array<Position, 4> getPositionsOf(unsigned int index);
+		int findIndexOf(const std::string& fileName);
+		int getIndex() { return index; }
+		void setIndex(int index) { this->index = index; }
 		unsigned int layer;
+		std::string path;
 	private:
+		int index = 0;
 		void readJSon(const std::string& fileName);
 		void normalizeTexture(unsigned int index);
 		std::string getValOfLine(std::string line);
