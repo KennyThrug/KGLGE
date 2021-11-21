@@ -79,6 +79,11 @@ void KGLGE::GameLoop::addKeyHandler(unsigned int layer, unsigned int index, unsi
 	allGameObjects->handlers.push_back({ key,layer,index,pressOnce });
 }
 
+void KGLGE::GameLoop::addKeyHandler(GameObjectLocation location, unsigned int key, bool pressOnce)
+{
+	addKeyHandler(location.layer, location.location, key, pressOnce);
+}
+
 void KGLGE::GameLoop::setAllObjectsToRedraw()
 {
 	allObjectsRerender = true;
@@ -140,6 +145,12 @@ void KGLGE::GameLoop::LoadLevel(Level* lvl)
 	}
 }
 
+void KGLGE::GameLoop::addLevelCreator()
+{
+	GameObjectLocation loc = addGameObject(new LevelCreator(), 0);
+	addKeyHandler(loc,GLFW_KEY_RIGHT,true);
+}
+
 KGLGE::GameObject* KGLGE::GameLoop::getGameObjectTypeFromID(KGLGE::Level::Body bd)
 {
 	//Puts all the data in an array thats easier to use
@@ -156,6 +167,9 @@ KGLGE::GameObject* KGLGE::GameLoop::getGameObjectTypeFromID(KGLGE::Level::Body b
 		return new Sprite(getAtlas(temp[0]),temp[1],temp[2],temp[3],temp[4],temp[5],temp[6]);
 		break;
 	case 2: //image
+		break;
+	case 3: //Empty
+		return new Empty();
 		break;
 	}
 }

@@ -16,6 +16,7 @@
 		KGLGE::loadLevel("Zinc.lvl", lvl);
 		loop.LoadLevel(lvl);
 		
+		loop.addLevelCreator();
 
 		loop.startLoop();
 		glfwTerminate();

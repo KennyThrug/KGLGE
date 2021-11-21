@@ -3,6 +3,7 @@
 #include "Batcher.h"
 #include "ShaderProgram.h"
 #include "Square.h"
+#include "LevelCreator.h"
 #include "LevelLoader.h"
 #include "TextureAtlas.h"
 #define LEVELLOAD
@@ -47,6 +48,7 @@ namespace KGLGE {
 		/// <param name="index"></param>
 		void removeGameObject(unsigned int layer, unsigned int index);
 		void addKeyHandler(unsigned int layer, unsigned int index,unsigned int key,bool pressOnce = false);
+		void addKeyHandler(GameObjectLocation location, unsigned int key, bool pressOnce = false);
 		//Unimplemented
 		void removeTexture(unsigned int index);
 		void setAllObjectsToRedraw();
@@ -102,6 +104,7 @@ namespace KGLGE {
 			atlas.erase(atlas.begin() + index);
 			allGameObjects->removeAtlas(index);
 		}
+		void addLevelCreator();
 		virtual KGLGE::GameObject* getGameObjectTypeFromID(KGLGE::Level::Body bd);
 	protected:
 		std::vector<TextureAtlas*> atlas;
