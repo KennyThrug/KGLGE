@@ -1,7 +1,9 @@
 #pragma once
-#include "Math.hpp"
 #include <stack>
+#include "Math.hpp"
 #include <vector>
+#include <string>
+
 namespace KGLGE {
 
 	//Number of layers total
@@ -96,9 +98,16 @@ namespace KGLGE {
 		int layer;
 		int location;
 	};
+	struct KeyHandler {
+		unsigned int key;
+		unsigned int layer;
+		unsigned int num;
+		bool pressOnce;
+	};
 	class AllGameObjects {
 
 	public:
+		std::vector<KeyHandler> handlers;
 		GameObjectLocation addGameObject(GameObject* obj, unsigned int layer) {
 			if (stk[layer].empty()) {
 				gameObjects[layer].push_back(obj);
@@ -153,12 +162,33 @@ namespace KGLGE {
 			}
 			return std::vector<GameObjectLocation>();
 		}
-	private:
-		std::stack<int> stk[NumLayers];
+		unsigned int getNumberTextureAtlas() {
+			return atlasFiles.size();
+		}
+		std::string getAtlasPath(unsigned int index) {
+			return atlasFiles[index];
+		}
+		int getAtlasLayer(unsigned int index) {
+			return atlasLayers[index];
+		}
+		void addAtlas(std::string filePath, int layer) {
+			atlasFiles.push_back(filePath);
+			atlasLayers.push_back(layer);
+		}
+		void removeAtlas(int index) {
+			atlasLayers.erase(atlasLayers.begin() + index);
+			atlasFiles.erase(atlasFiles.begin() + index);
+		}
 		std::vector<int> propertykey;
 		std::vector<std::vector<GameObjectLocation>> properties;
+	private:
+		std::vector<std::string> atlasFiles;
+		std::vector<int> atlasLayers;
+		std::stack<int> stk[NumLayers];
+
 	protected:
 		std::array<std::vector<GameObject*>, NumLayers> gameObjects;
 		unsigned char m_numGameObjects[NumLayers];
 	};
 }
+

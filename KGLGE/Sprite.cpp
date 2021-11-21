@@ -14,27 +14,50 @@ int KGLGE::Sprite::getGameObjectID()
 
 float KGLGE::Sprite::getProperty(int propertyNum)
 {
-	return 0;
+	switch (propertyNum) {
+	case 0:
+		return m_indexAtlas;
+		break;
+	case 1:
+		return m_x;
+		break;
+	case 2:
+		return m_y;
+		break;
+	case 3:
+		return m_Width;
+		break;
+	case 4:
+		return m_Height;
+		break;
+	case 5:
+		return m_fileName;
+		break;
+	case 6:
+		return m_numRotations;
+		break;
+	}
 }
 
 int KGLGE::Sprite::getPropertyID(int propertyNum)
 {
 	if (propertyNum == 0)
-		return 0;
+		return 1;
+	return 3;
 }
 
 int KGLGE::Sprite::getPropertySize(int propertyNum)
 {
-	return 0;
+	return (propertyNum == 0) ? sizeof(int) : sizeof(float);
 }
 
 int KGLGE::Sprite::getNumProperties()
 {
-	return 0;
+	return 7;
 }
 
 KGLGE::Sprite::Sprite(TextureAtlas* atlas, float x, float y, float width, float height,std::string fileName,unsigned int numRotations)
-	: GameObject()
+	: GameObject(), m_fileName(atlas->findIndexOf(fileName)),m_numRotations(numRotations), m_indexAtlas(atlas->getIndex())
 {
 
 	m_x = x;
@@ -56,7 +79,7 @@ KGLGE::Sprite::Sprite(TextureAtlas* atlas, float x, float y, float width, float 
 }
 
 KGLGE::Sprite::Sprite(TextureAtlas* atlas, float x, float y, float width, float height, int fileIndex, unsigned int numRotations)
-	: GameObject()
+	: GameObject(), m_fileName(fileIndex), m_numRotations(numRotations), m_indexAtlas(atlas->getIndex())
 {
 
 	m_x = x;

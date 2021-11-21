@@ -39,6 +39,13 @@ KGLGE::TextureAtlas::TextureAtlas(const std::string& folderPath, unsigned int la
 	readJSon(folderPath + "metadata.json");
 }
 
+KGLGE::TextureAtlas::TextureAtlas(const std::string& folderPath, unsigned int layer, int index)
+	:layer(layer), path(folderPath), index(index)
+{
+	KGLGE::loadTexture(folderPath + "texture.png", layer, &m_width, &m_height, &m_bpp);
+	readJSon(folderPath + "metadata.json");
+}
+
 KGLGE::TextureAtlas::~TextureAtlas()
 {
 	for (int i = 0; i < loadedTextures.size(); i++) {

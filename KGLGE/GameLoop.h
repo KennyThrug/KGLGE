@@ -2,10 +2,10 @@
 #include "Window.h"
 #include "Batcher.h"
 #include "ShaderProgram.h"
-#include "TextureAtlas.h"
 #include "Square.h"
 #include "LevelLoader.h"
-
+#include "TextureAtlas.h"
+#define LEVELLOAD
 namespace KGLGE {
 
 	class GameLoop
@@ -77,30 +77,44 @@ namespace KGLGE {
 		}
 
 		void LoadLevel(Level* lvl);
-		unsigned int addTextureAtlas(KGLGE::TextureAtlas* atlas);
-		unsigned int addTextureAtlas(std::string filePath, unsigned int layer);
-		KGLGE::TextureAtlas *getAtlas(int index);
-		void removeAllTextureAtlas();
-		void removeTextureAtlas(int index);
+		unsigned int getNumberTextureAtlas() { return atlas.size(); }
+		unsigned int addTextureAtlas(TextureAtlas* atlas) {
+			this->atlas.push_back(atlas);
+			int i = this->atlas.size() - 1;
+			atlas->setIndex(i);
+			return i;
+		}
+		unsigned int addTextureAtlas(std::string filePath, unsigned int layer) {
+			TextureAtlas* a = new TextureAtlas(filePath, layer);
+			allGameObjects->addAtlas(filePath, layer);
+			return addTextureAtlas(a);
+		}
+		KGLGE::TextureAtlas* getAtlas(int index) {
+			return atlas[index];
+		}
+		void removeAllTextureAtlas() {
+			for (int i = 0; i < atlas.size(); i++) {
+				atlas.pop_back();
+				allGameObjects->removeAtlas(0);
+			}
+		}
+		void removeTextureAtlas(int index) {
+			atlas.erase(atlas.begin() + index);
+			allGameObjects->removeAtlas(index);
+		}
+		virtual KGLGE::GameObject* getGameObjectTypeFromID(KGLGE::Level::Body bd);
 	protected:
+		std::vector<TextureAtlas*> atlas;
 		AllGameObjects* allGameObjects;
 		float r, g, b, a;
 	private:
-		std::vector<TextureAtlas*> atlas;
 		int ticks;
 		double timeProgramStarted = glfwGetTime();
 		double prevTime = glfwGetTime();
 		int FPS = 0;
 		void updateTime();
 		bool allObjectsRerender = false;
-		struct KeyHandler {
-			unsigned int key;
-			unsigned int layer;
-			unsigned int num;
-			bool pressOnce;
-		};
 		Window* p_Window;
-		std::vector<KeyHandler> handlers;
 		ShaderProgram shader;
 	};
 

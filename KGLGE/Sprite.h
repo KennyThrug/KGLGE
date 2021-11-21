@@ -21,6 +21,7 @@ namespace KGLGE {
 	private:
 		KGLGE::Vertex m_vertex[4];
 		KGLGE::Triangle m_Triangles[2];
+		int m_fileName, m_numRotations, m_indexAtlas;
 
 		// Inherited via GameObject
 		virtual int getGameObjectID() override;

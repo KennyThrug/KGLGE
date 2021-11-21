@@ -25,9 +25,9 @@ void KGLGE::GameLoop::startLoop()
 
 
 			//Key Handlers
-			for (int i = 0; i < handlers.size(); i++) {
-				if (p_Window->getKey(handlers[i].key, handlers[i].pressOnce))
-					getGameObject(handlers[i].layer,handlers[i].num)->respondToKey(handlers[i].key);
+			for (int i = 0; i < allGameObjects->handlers.size(); i++) {
+				if (p_Window->getKey(allGameObjects->handlers[i].key, allGameObjects->handlers[i].pressOnce))
+					getGameObject(allGameObjects->handlers[i].layer, allGameObjects->handlers[i].num)->respondToKey(allGameObjects->handlers[i].key);
 			}
 
 
@@ -76,7 +76,7 @@ void KGLGE::GameLoop::removeGameObject(unsigned int layer,unsigned int index)
 
 void KGLGE::GameLoop::addKeyHandler(unsigned int layer, unsigned int index, unsigned int key,bool pressOnce)
 {
-	handlers.push_back({ key,layer,index,pressOnce });
+	allGameObjects->handlers.push_back({ key,layer,index,pressOnce });
 }
 
 void KGLGE::GameLoop::setAllObjectsToRedraw()
@@ -124,38 +124,40 @@ bool KGLGE::GameLoop::checkCollision(int indexOneLayer, int indexOne, int indexT
 
 void KGLGE::GameLoop::LoadLevel(Level* lvl)
 {
+	for (int i = 0; i < lvl->numTextureAtlas; i++) {
+		addTextureAtlas(lvl->atlasNames[i],lvl->layer[i]);
+	}
 	for (int i = 0; i < lvl->numObjects; i++) {
-		addGameObject(lvl->getGameObjectTypeFromID(lvl->body[i]),lvl->body[i].layer);
+		addGameObject(getGameObjectTypeFromID(lvl->body[i]),lvl->body[i].layer);
+	}
+	for (int i = 0; i < lvl->numHandlers; i++) {
+		addKeyHandler(lvl->handlers[i].layer, lvl->handlers[i].num, lvl->handlers[i].key, lvl->handlers[i].pressOnce);
+	}
+	int count = -1;
+	int last = -1;
+	for (int i = 0; i < lvl->numProperties; i++) {
+		addProperty({ lvl->properties[i].layer, lvl->properties[i].location }, lvl->propertyKey[i]);
 	}
 }
 
-unsigned int KGLGE::GameLoop::addTextureAtlas(KGLGE::TextureAtlas* atlas)
+KGLGE::GameObject* KGLGE::GameLoop::getGameObjectTypeFromID(KGLGE::Level::Body bd)
 {
-	this->atlas.push_back(atlas);
-	return this->atlas.size() - 1;
-}
-
-unsigned int KGLGE::GameLoop::addTextureAtlas(std::string filePath, unsigned int layer)
-{
-	TextureAtlas *a = new TextureAtlas(filePath, layer);
-	return addTextureAtlas(a);
-}
-
-KGLGE::TextureAtlas* KGLGE::GameLoop::getAtlas(int index)
-{
-	return atlas[index];
-}
-
-void KGLGE::GameLoop::removeAllTextureAtlas()
-{
-	for (int i = 0; i < atlas.size();i++) {
-		atlas.pop_back();
+	//Puts all the data in an array thats easier to use
+	float temp[64];
+	for (int i = 0; i < bd.numParameters; i++) {
+		temp[i] = bd.parameters[i].data;
 	}
-}
 
-void KGLGE::GameLoop::removeTextureAtlas(int index)
-{
-	atlas.erase(atlas.begin() + index);
+	switch (bd.id) {
+	case 0: //Square
+		return new Square(temp[0], temp[1], temp[2], temp[3], temp[4], temp[5], temp[6], temp[7]);
+		break;
+	case 1: //Sprite
+		return new Sprite(getAtlas(temp[0]),temp[1],temp[2],temp[3],temp[4],temp[5],temp[6]);
+		break;
+	case 2: //image
+		break;
+	}
 }
 
 void KGLGE::GameLoop::updateTime()
