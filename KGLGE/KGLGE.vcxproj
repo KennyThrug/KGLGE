@@ -176,6 +176,7 @@
     <ClInclude Include="LevelCreator.h" />
     <ClInclude Include="LevelLoader.h" />
     <ClInclude Include="Math.hpp" />
+    <ClInclude Include="RedAndBlue.h" />
     <ClInclude Include="Runner.h" />
     <ClInclude Include="ShaderProgram.h" />
     <ClInclude Include="Sprite.h" />
@@ -192,6 +193,7 @@
     <ClCompile Include="LevelCreator.cpp" />
     <ClCompile Include="LevelLoader.cpp" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="RedAndBlue.cpp" />
     <ClCompile Include="ShaderProgram.cpp" />
     <ClCompile Include="Sprite.cpp" />
     <ClCompile Include="Square.cpp" />

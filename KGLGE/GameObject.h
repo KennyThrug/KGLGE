@@ -1,5 +1,7 @@
 #pragma once
 #include <stack>
+#include <GLEW/GL/glew.h>
+#include <GLFW/glfw3.h>
 #include "Math.hpp"
 #include <vector>
 #include <string>

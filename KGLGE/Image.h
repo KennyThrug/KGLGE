@@ -6,7 +6,8 @@ namespace KGLGE {
 	public:
 		Image(float x, float y, float width, float height, std::string fileName, unsigned int texSlot);
 		// Inherited via GameObject
-		virtual void update() override;
+		
+		void update() override;
 		virtual Vertex* getVertexes() override;
 		virtual unsigned int getNumVertex() override;
 		virtual Triangle* getIndicies(unsigned int offset) override;
