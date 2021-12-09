@@ -1,7 +1,6 @@
 #pragma once
-#include <GLEW/GL/glew.h>
+#include <GL/glew.h>
 #include <GLFW/glfw3.h>
-#include <gl/GL.h>
 #include <string>
 namespace KGLGE {
 	void initializeGLFW();
