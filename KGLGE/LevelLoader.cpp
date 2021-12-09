@@ -205,18 +205,18 @@ KGLGE::Level KGLGE::convertAllGameObjectsToLevel(AllGameObjects* all)
 		lvl.layer.push_back(all->getAtlasLayer(i));
 	}
 
-	for (int i = 0; i < NumLayers; i++) {
+	for (unsigned int i = 0; i < NumLayers; i++) {
 		for (int j = 0; j < all->getNumGameObjects(i); j++) {
 			KGLGE::Level::Body bd = {
-				all->getGameObject(i, j)->getGameObjectID(),
+				(unsigned int)all->getGameObject(i, j)->getGameObjectID(),
 				i,
-				all->getGameObject(i, j)->getNumProperties(),
+				(unsigned int)all->getGameObject(i, j)->getNumProperties(),
 				std::vector<KGLGE::Level::Parameters>()
 			};
 			lvl.body.push_back(bd);
 			for (int k = 0; k < lvl.body[lvl.body.size()-1].numParameters; k++) {
 				KGLGE::Level::Parameters param = {
-					all->getGameObject(i,j)->getPropertyID(k),
+					(unsigned int)all->getGameObject(i,j)->getPropertyID(k),
 					all->getGameObject(i,j)->getProperty(k)
 				};
 

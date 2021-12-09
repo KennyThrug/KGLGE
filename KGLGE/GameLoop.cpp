@@ -172,6 +172,8 @@ KGLGE::GameObject* KGLGE::GameLoop::getGameObjectTypeFromID(KGLGE::Level::Body b
 		return new Empty();
 		break;
 	}
+	
+	return nullptr;
 }
 
 void KGLGE::GameLoop::updateTime()

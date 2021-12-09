@@ -36,6 +36,8 @@ float KGLGE::Sprite::getProperty(int propertyNum)
 	case 6:
 		return m_numRotations;
 		break;
+	default:
+		return -1;
 	}
 }
 

@@ -78,6 +78,7 @@ int KGLGE::TextureAtlas::findIndexOf(const std::string& fileName)
 			return i;
 		}
 	}
+	return -1;
 }
 
 void KGLGE::TextureAtlas::readJSon(const std::string& fileName)
