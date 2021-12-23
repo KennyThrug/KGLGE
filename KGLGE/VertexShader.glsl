@@ -1,4 +1,4 @@
-#version 330 core
+#version 460 core
 
 layout(location = 0) in vec4 position;
 layout(location = 1) in vec2 texCoord;
@@ -14,19 +14,6 @@ out vec2 v_TexCoord;
 out float v_texID;
 out vec4 v_colour;
 
-float toLocal(float start,float maximum, float minimum){
-	if(maximum == 1){
-		return 0;
-	}
-	if(minimum == maximum){
-		minimum = -1;
-		maximum = 1;
-	}
-	if(u_x_max == 1)
-		return start - 0.25;
-	return start;
-	//return ((((start-minimum)/(maximum-minimum)) * 2) - 1);
-}
 void main()
 {
 	vec4 localPos = vec4( (((position[0] - u_x_min)/(u_x_max-u_x_min)) * 2) - 1,

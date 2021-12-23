@@ -7,3 +7,5 @@
 *.idb
 *.lib
 *.pdb
+*.gch
+main

@@ -128,7 +128,7 @@ void KGLGE::saveLevel(const std::string& fileName, Level lvl)
 	char buffer[64];
 
 	//Texture Atlas Stuff
-	sprintf_s(buffer, "%i", lvl.numTextureAtlas);
+	sprintf(buffer, "%i", lvl.numTextureAtlas);
 	addCharsToBuffer(&fullBuffer, buffer, sizeof(int));
 	for (int i = 0; i < lvl.numTextureAtlas; i++) {
 		const char* charRepString = lvl.atlasNames[i].c_str();
@@ -136,58 +136,58 @@ void KGLGE::saveLevel(const std::string& fileName, Level lvl)
 			fullBuffer.push_back(charRepString[j]);
 		}
 		fullBuffer.push_back('\n');
-		sprintf_s(buffer, "%i", lvl.layer[i]);
+		sprintf(buffer, "%i", lvl.layer[i]);
 		addCharsToBuffer(&fullBuffer, buffer, sizeof(int));
 	}
 
 	//Game Object Stuff
-	sprintf_s(buffer, "%i", lvl.numObjects);
+	sprintf(buffer, "%i", lvl.numObjects);
 	addCharsToBuffer(&fullBuffer, buffer, sizeof(int));
 
 	for (int i = 0; i < lvl.numObjects; i++) {
-		sprintf_s(buffer, "%i", lvl.body[i].id);
+		sprintf(buffer, "%i", lvl.body[i].id);
 		addCharsToBuffer(&fullBuffer, buffer, sizeof(int));
 
-		sprintf_s(buffer, "%i", lvl.body[i].layer);
+		sprintf(buffer, "%i", lvl.body[i].layer);
 		addCharsToBuffer(&fullBuffer, buffer, sizeof(int));
 
-		sprintf_s(buffer, "%i", lvl.body[i].numParameters);
+		sprintf(buffer, "%i", lvl.body[i].numParameters);
 		addCharsToBuffer(&fullBuffer, buffer, sizeof(int));
 
 		for (int j = 0; j < lvl.body[i].numParameters; j++) {
-			sprintf_s(buffer, "%i", lvl.body[i].parameters[j].typeOfParameter);
+			sprintf(buffer, "%i", lvl.body[i].parameters[j].typeOfParameter);
 			addCharsToBuffer(&fullBuffer, buffer, sizeof(int));
 
-			sprintf_s(buffer, "%f", lvl.body[i].parameters[j].data);
+			sprintf(buffer, "%f", lvl.body[i].parameters[j].data);
 			addCharsToBuffer(&fullBuffer, buffer, sizeof(float));
 		}
 	}
-	sprintf_s(buffer, "%i", lvl.numHandlers);
+	sprintf(buffer, "%i", lvl.numHandlers);
 	addCharsToBuffer(&fullBuffer, buffer, sizeof(int));
 	for (int i = 0; i < lvl.numHandlers; i++) {
 		fullBuffer.push_back(lvl.handlers[i].pressOnce ? 't' : 'f');
 
-		sprintf_s(buffer, "%i", lvl.handlers[i].layer);
+		sprintf(buffer, "%i", lvl.handlers[i].layer);
 		addCharsToBuffer(&fullBuffer, buffer, sizeof(int));
 
-		sprintf_s(buffer, "%i", lvl.handlers[i].num);
+		sprintf(buffer, "%i", lvl.handlers[i].num);
 		addCharsToBuffer(&fullBuffer, buffer, sizeof(int));
 
-		sprintf_s(buffer, "%i", lvl.handlers[i].key);
+		sprintf(buffer, "%i", lvl.handlers[i].key);
 		addCharsToBuffer(&fullBuffer, buffer, sizeof(int));
 	}
 	//Properties
 
-	sprintf_s(buffer, "%i", lvl.numProperties);
+	sprintf(buffer, "%i", lvl.numProperties);
 	addCharsToBuffer(&fullBuffer, buffer, sizeof(int));
 	for (int i = 0; i < lvl.numProperties; i++) {
-		sprintf_s(buffer, "%i", lvl.properties[i].layer);
+		sprintf(buffer, "%i", lvl.properties[i].layer);
 		addCharsToBuffer(&fullBuffer, buffer, sizeof(int));
 
-		sprintf_s(buffer, "%i", lvl.properties[i].location);
+		sprintf(buffer, "%i", lvl.properties[i].location);
 		addCharsToBuffer(&fullBuffer, buffer, sizeof(int));
 
-		sprintf_s(buffer, "%i", lvl.propertyKey[i]);
+		sprintf(buffer, "%i", lvl.propertyKey[i]);
 		addCharsToBuffer(&fullBuffer, buffer, sizeof(int));
 	}
 	std::ofstream file(fileName, std::ios::binary);
@@ -205,18 +205,18 @@ KGLGE::Level KGLGE::convertAllGameObjectsToLevel(AllGameObjects* all)
 		lvl.layer.push_back(all->getAtlasLayer(i));
 	}
 
-	for (int i = 0; i < NumLayers; i++) {
+	for (unsigned int i = 0; i < NumLayers; i++) {
 		for (int j = 0; j < all->getNumGameObjects(i); j++) {
 			KGLGE::Level::Body bd = {
-				all->getGameObject(i, j)->getGameObjectID(),
+				(unsigned int)all->getGameObject(i, j)->getGameObjectID(),
 				i,
-				all->getGameObject(i, j)->getNumProperties(),
+				(unsigned int)all->getGameObject(i, j)->getNumProperties(),
 				std::vector<KGLGE::Level::Parameters>()
 			};
 			lvl.body.push_back(bd);
 			for (int k = 0; k < lvl.body[lvl.body.size()-1].numParameters; k++) {
 				KGLGE::Level::Parameters param = {
-					all->getGameObject(i,j)->getPropertyID(k),
+					(unsigned int)all->getGameObject(i,j)->getPropertyID(k),
 					all->getGameObject(i,j)->getProperty(k)
 				};
 

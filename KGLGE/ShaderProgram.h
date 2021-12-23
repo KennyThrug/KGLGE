@@ -4,7 +4,7 @@
 #include <sstream>
 #include "GameObject.h"
 #include <fstream>
-#include <GLEW/GL/glew.h>
+#include <GL/glew.h>
 #include <GLFW/glfw3.h>
 
 namespace KGLGE {

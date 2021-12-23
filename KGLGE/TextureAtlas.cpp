@@ -1,7 +1,7 @@
 #include "TextureAtlas.h"
 #ifndef STB_IMAGE_IMPLEMENTATION
 #define STB_IMAGE_IMPLEMENTATION
-#include <STB_IMAGE/stb_image.h>
+#include "Dependencies/include/STB_IMAGE/stb_image.h"
 #endif // !STB_IMAGE_IMPLEMENTATION
 
 GLuint KGLGE::loadTexture(const std::string& fileName, unsigned char textureSlot)
@@ -78,6 +78,7 @@ int KGLGE::TextureAtlas::findIndexOf(const std::string& fileName)
 			return i;
 		}
 	}
+	return -1;
 }
 
 void KGLGE::TextureAtlas::readJSon(const std::string& fileName)
