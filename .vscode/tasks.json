@@ -7,7 +7,7 @@
             "args": [
                 "-fdiagnostics-color=always",
                 "-o",
-                "main",
+                "../../lib/KGLGE.out",
                 "-g",
                 "main.cpp",
                 "Window.cpp",
@@ -48,26 +48,26 @@
         },
         {
             "type": "cppbuild",
-            "label": "Build File For Library",
+            "label": "Build Files For Library",
             "command": "/usr/bin/g++",
             "args": [
                 "-fdiagnostics-color=always",
                 "-c",
                 "-g",
-                "main.cpp",
-                "Window.cpp",
-                "Batcher.cpp",
-                "Empty.cpp",
-                "GameLoop.cpp",
-                "GameObject.cpp",
-                "Image.cpp",
-                "LevelCreator.cpp",
-                "LevelLoader.cpp",
-                "RedAndBlue.cpp",
-                "ShaderProgram.cpp",
-                "Sprite.cpp",
-                "Square.cpp",
-                "TextureAtlas.cpp",
+                "../src/cpp/main.cpp",
+                "../src/cpp/Window.cpp",
+                "../src/cpp/Batcher.cpp",
+                "../src/cpp/Empty.cpp",
+                "../src/cpp/GameLoop.cpp",
+                "../src/cpp/GameObject.cpp",
+                "../src/cpp/Image.cpp",
+                "../src/cpp/LevelCreator.cpp",
+                "../src/cpp/LevelLoader.cpp",
+                "../src/cpp/RedAndBlue.cpp",
+                "../src/cpp/ShaderProgram.cpp",
+                "../src/cpp/Sprite.cpp",
+                "../src/cpp/Square.cpp",
+                "../src/cpp/TextureAtlas.cpp",
 
                 "-lGL",
                 "-lGLU",
@@ -83,7 +83,7 @@
                 "-lGLEW"
             ],
             "options": {
-                "cwd": "${fileDirname}"
+                "cwd": "${fileDirname}/../../obj"
             },
             "problemMatcher": [
                 "$gcc"
@@ -97,24 +97,24 @@
             "command": "/usr/bin/ar",
             "args": [
                 "rs",
-                "KGLGE.a",
-                "Batcher.o",
-                "Empty.o",
-                "GameLoop.o",
-                "GameObject.o",
-                "Image.o",
-                "LevelCreator.o",
-                "LevelLoader.o",
-                "main.o",
-                "RedAndBlue.o",
-                "ShaderProgram.o",
-                "Sprite.o",
-                "Square.o",
-                "TextureAtlas.o",
-                "Window.o"
+                "../obj/KGLGE.a",
+                "../obj/Batcher.o",
+                "../obj/Empty.o",
+                "../obj/GameLoop.o",
+                "../obj/GameObject.o",
+                "../obj/Image.o",
+                "../obj/LevelCreator.o",
+                "../obj/LevelLoader.o",
+                "../obj/main.o",
+                "../obj/RedAndBlue.o",
+                "../obj/ShaderProgram.o",
+                "../obj/Sprite.o",
+                "../obj/Square.o",
+                "../obj/TextureAtlas.o",
+                "../obj/Window.o"
             ],
             "options": {
-                "cwd": "${fileDirname}"
+                "cwd": "${fileDirname}/../../lib"
             },
             "problemMatcher": [
                 "$gcc"

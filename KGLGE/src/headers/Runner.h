@@ -12,7 +12,7 @@
 		KGLGE::GameLoop loop(&win);
 
 		KGLGE::Level* lvl = new KGLGE::Level;
-		KGLGE::loadLevel("Zinc.lvl", lvl);
+		KGLGE::loadLevel("../../res/Levels/Zinc.lvl", lvl);
 		loop.LoadLevel(lvl);
 		
 		loop.addLevelCreator();

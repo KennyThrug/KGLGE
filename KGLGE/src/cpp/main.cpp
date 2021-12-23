@@ -1,6 +1,6 @@
-#include "Math.hpp"
+#include "../headers/Math.hpp"
 #include <iostream>
-#include "Runner.h"
+#include "../headers/Runner.h"
 
 int main() {
 	runProgram();

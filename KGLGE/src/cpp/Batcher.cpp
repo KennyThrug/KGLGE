@@ -1,4 +1,4 @@
-#include "Batcher.h"
+#include "../headers/Batcher.h"
 
 void KGLGE::Batcher::setValues(KGLGE::Vertex* verticies, unsigned int numVerticies, KGLGE::Triangle* indicies, unsigned int numTriangles)
 {

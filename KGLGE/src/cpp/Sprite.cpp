@@ -1,4 +1,4 @@
-#include "Sprite.h"
+#include "../headers/Sprite.h"
 
 void KGLGE::Sprite::resetTextures() {
 	m_vertex[0].position = { m_x,m_y };
