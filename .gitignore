@@ -8,4 +8,6 @@
 *.lib
 *.pdb
 *.gch
+*.o
+*.a
 main

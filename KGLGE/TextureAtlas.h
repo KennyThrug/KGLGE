@@ -6,7 +6,7 @@
 #include <array>
 #include "Math.hpp"
 #include "ShaderProgram.h"
-#include "Dependencies/include/json.hpp"
+#include "json.hpp"
 namespace KGLGE {
 	/// <summary>
 	/// Loads a texture, and sets it to a Sampler slot
