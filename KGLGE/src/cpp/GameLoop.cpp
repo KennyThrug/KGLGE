@@ -1,8 +1,8 @@
-#include "GameLoop.h"
+#include "../headers/GameLoop.h"
 void KGLGE::GameLoop::update() {
 	if (getWin()->getKey(GLFW_KEY_Y, true)) {
 		Level lvl = convertAllGameObjectsToLevel(allGameObjects);
-		saveLevel("Zinc.lvl", lvl);
+		saveLevel("../../res/Zinc.lvl", lvl);
 	}
 }
 

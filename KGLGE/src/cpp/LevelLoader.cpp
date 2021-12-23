@@ -1,4 +1,4 @@
-#include "LevelLoader.h"
+#include "../headers/LevelLoader.h"
 
 void KGLGE::addCharsToBuffer(std::vector<char>* buffer, char* chars, int size)
 {

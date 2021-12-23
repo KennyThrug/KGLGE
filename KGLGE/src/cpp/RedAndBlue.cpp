@@ -1,4 +1,4 @@
-#include "RedAndBlue.h"
+#include "../headers/RedAndBlue.h"
 
 void KGLGE::RedAndBlue::update()
 {

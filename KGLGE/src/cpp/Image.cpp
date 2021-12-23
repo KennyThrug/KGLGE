@@ -1,4 +1,4 @@
-#include "Image.h"
+#include "../headers/Image.h"
 
 KGLGE::Image::Image(float x, float y, float width, float height, std::string fileName, unsigned int texSlot)
 	: GameObject()

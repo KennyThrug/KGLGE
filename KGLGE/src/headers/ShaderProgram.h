@@ -17,7 +17,7 @@ namespace KGLGE {
 	class ShaderProgram
 	{
 	public:
-		ShaderProgram(std::string VertexShaderFileName = "VertexShader.glsl", std::string FragmentShaderFileName = "FragmentShader.glsl");
+		ShaderProgram(std::string VertexShaderFileName = "../shaders/VertexShader.glsl", std::string FragmentShaderFileName = "../shaders/FragmentShader.glsl");
 		void init();
 		/// <summary>
 		/// Paints the verticies given

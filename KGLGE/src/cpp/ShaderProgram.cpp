@@ -1,4 +1,4 @@
-#include "ShaderProgram.h"
+#include "../headers/ShaderProgram.h"
 
 KGLGE::ShaderProgram::ShaderProgram(std::string VertexShaderFileName, std::string FragmentShaderFileName)
 {

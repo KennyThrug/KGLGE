@@ -1,4 +1,4 @@
-#include "Square.h"
+#include "../headers/Square.h"
 
 KGLGE::Square::Square(float x, float y, float w, float h, float red, float green, float blue, float alpha)
 {
