@@ -4,6 +4,7 @@
 #include "ShaderProgram.h"
 #include "Square.h"
 #include "LevelCreator.h"
+#include "Empty.h"
 #include "LevelLoader.h"
 #include "TextureAtlas.h"
 #define LEVELLOAD
@@ -40,6 +41,7 @@ namespace KGLGE {
 		/// <returns>the index of the object, will be the same thing as index</returns>
 		void setWindowSize(float min_x,float max_x, float min_y, float max_y) {
 			shader.setWindowSize(min_x, max_x, min_y, max_y);
+			allGameObjects->windowSize = {min_x, max_x, min_y, max_y};
 			setAllObjectsToRedraw();
 		}
 		/// <summary>

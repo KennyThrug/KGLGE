@@ -1,13 +1,14 @@
 #pragma once
 #include "GameLoop.h"
 #include "Window.h"
+#include "LevelCreator.h"
 #include "Sprite.h"
 #include "TextureAtlas.h"
 
 	void runProgram() {
 		
 		KGLGE::initializeGLFW();
-		KGLGE::Window win(500, 500, "Game Window");
+		KGLGE::Window win("Game Window");
 		win.display();
 		KGLGE::GameLoop loop(&win);
 

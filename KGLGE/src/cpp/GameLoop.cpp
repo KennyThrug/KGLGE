@@ -147,8 +147,9 @@ void KGLGE::GameLoop::LoadLevel(Level* lvl)
 
 void KGLGE::GameLoop::addLevelCreator()
 {
-	GameObjectLocation loc = addGameObject(new LevelCreator(), 0);
+	GameObjectLocation loc = addGameObject(new LevelCreator(), KGLGE_FOREGROUND);
 	addKeyHandler(loc,GLFW_KEY_RIGHT,true);
+	addKeyHandler(loc,GLFW_KEY_F,true);
 }
 
 KGLGE::GameObject* KGLGE::GameLoop::getGameObjectTypeFromID(KGLGE::Level::Body bd)

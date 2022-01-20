@@ -91,7 +91,6 @@ namespace KGLGE {
 		virtual unsigned int getNumTriangles() = 0;
 		void setAllGameObjects(AllGameObjects* all) { allGameObjects = all; }
 		std::vector<int> properties;
-	protected:
 		AllGameObjects* allGameObjects;
 	};
 
@@ -106,6 +105,7 @@ namespace KGLGE {
 		unsigned int num;
 		bool pressOnce;
 	};
+	
 	class AllGameObjects {
 
 	public:
@@ -138,6 +138,8 @@ namespace KGLGE {
 			return getGameObject(location.layer, location.location);
 		}
 		unsigned int getNumGameObjects(int layer) {
+			if(layer >= NumLayers || layer < 0)
+				return 0;
 			return m_numGameObjects[layer];
 		}
 		void addProperty(GameObjectLocation location, int prop) {
@@ -181,6 +183,13 @@ namespace KGLGE {
 			atlasLayers.erase(atlasLayers.begin() + index);
 			atlasFiles.erase(atlasFiles.begin() + index);
 		}
+		struct WindowSize{
+			float min_x;
+			float max_x;
+			float min_y;
+			float max_y;
+		};
+		WindowSize windowSize;
 		std::vector<int> propertykey;
 		std::vector<std::vector<GameObjectLocation>> properties;
 	private:
