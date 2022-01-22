@@ -1,0 +1,67 @@
+{
+    "Metadata": [
+        {
+            "name" : "a",
+            "x" : 20,
+            "y" : 20,
+            "width" : 80,
+            "height" : 80
+        },
+        {
+            "name" : "b",
+            "x" : 120,
+            "y" : 20,
+            "width" : 80,
+            "height" : 80
+        },
+        {
+            "name" : "c",
+            "x" : 230,
+            "y" : 20,
+            "width" : 80,
+            "height" : 80
+        },
+        {
+            "name" : "d",
+            "x" : 340,
+            "y" : 20,
+            "width" : 80,
+            "height" : 80
+        },
+        {
+            "name" : "e",
+            "x" : 450,
+            "y" : 20,
+            "width" : 80,
+            "height" : 80
+        },
+        {
+            "name" : "f",
+            "x" : 560,
+            "y" : 20,
+            "width" : 80,
+            "height" : 80
+        },
+        {
+            "name" : "g",
+            "x" : 670,
+            "y" : 20,
+            "width" : 80,
+            "height" : 80
+        },
+        {
+            "name" : "h",
+            "x" : 780,
+            "y" : 20,
+            "width" : 80,
+            "height" : 80
+        },
+        {
+            "name" : "i",
+            "x" : 890,
+            "y" : 20,
+            "width" : 80,
+            "height" : 80
+        }
+    ]
+}

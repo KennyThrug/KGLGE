@@ -23,6 +23,7 @@
                 "Sprite.cpp",
                 "Square.cpp",
                 "TextureAtlas.cpp",
+                "TextRenderer.cpp",
 
                 "-lGL",
                 "-lGLU",
@@ -68,6 +69,7 @@
                 "../src/cpp/Sprite.cpp",
                 "../src/cpp/Square.cpp",
                 "../src/cpp/TextureAtlas.cpp",
+                "../src/cpp/TextRenderer.cpp",
 
                 "-lGL",
                 "-lGLU",
@@ -111,7 +113,8 @@
                 "../obj/Sprite.o",
                 "../obj/Square.o",
                 "../obj/TextureAtlas.o",
-                "../obj/Window.o"
+                "../obj/Window.o",
+                "../obj/TextRenderer.o"
             ],
             "options": {
                 "cwd": "${fileDirname}/../../lib"
