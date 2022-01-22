@@ -1,5 +1,6 @@
 #pragma once
 #include "Sprite.h"
+#include "Square.h"
 #include "TextureAtlas.h"
 //#include "LetterValues.h"
 namespace KGLGE{
@@ -32,6 +33,8 @@ namespace KGLGE{
 			unsigned int getNumTriangles() override;
 			virtual bool respondToKey(unsigned int key) override;
         private:
+            std::vector<Vertex> verticies;
+            std::vector<Triangle> tri;
             KGLGE::TextureAtlas* font;
             std::vector<KGLGE::Sprite*> letters;
     };

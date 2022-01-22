@@ -42,6 +42,8 @@ void KGLGE::GameLoop::startLoop()
 							//Set Rendering
 							getGameObject(i,j)->shouldUpdate = false;
 							batcher.setValues(getGameObject(i,j)->getVertexes(), getGameObject(i,j)->getNumVertex(), getGameObject(i,j)->getIndicies(batcher.getVertexPointer()), getGameObject(i,j)->getNumTriangles());
+							Vertex* yes = getGameObject(i,j)->getVertexes();
+							std::cout << "test";
 						}
 						batcher.increaseCounter(getGameObject(i,j)->getNumVertex());
 						batcher.increaseIndex(getGameObject(i,j)->getNumTriangles());
@@ -75,7 +77,7 @@ void KGLGE::GameLoop::removeGameObject(unsigned int layer,unsigned int index)
 }
 
 void KGLGE::GameLoop::addKeyHandler(unsigned int layer, unsigned int index, unsigned int key,bool pressOnce)
-{
+{int
 	allGameObjects->handlers.push_back({ key,layer,index,pressOnce });
 }
 
