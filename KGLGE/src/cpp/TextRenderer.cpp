@@ -4,7 +4,6 @@ KGLGE::TextRenderer::TextRenderer(KGLGE::TextureAtlas* fontAtlas) : font(fontAtl
 }
 KGLGE::Position KGLGE::TextRenderer::addText(float x, float y, float fontSize, unsigned int letterCode){
     KGLGE::Sprite* letter = new KGLGE::Sprite(font,x,y,fontSize,fontSize,letterCode,0);
-    //KGLGE::Square* letter = new KGLGE::Square(x,y,fontSize,fontSize,1,0,0,1);
     letters.push_back(letter);
     shouldUpdate = true;
     return {x + (fontSize * 1.25f), y};
@@ -66,10 +65,5 @@ unsigned int KGLGE::TextRenderer::getNumTriangles(){
     return numTri;
 }
 bool KGLGE::TextRenderer::respondToKey(unsigned int key){
-    if(key == GLFW_KEY_Q){
-        addText(curLocation,0,0.1f,curLetter);
-        curLocation += 0.15f;
-        curLetter++;
-        shouldUpdate = true;
-    }
+    return false;
 }
