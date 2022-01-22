@@ -13,9 +13,9 @@
 		win.display();
 		KGLGE::GameLoop loop(&win);
 
-		KGLGE::Level* lvl = new KGLGE::Level;
-		KGLGE::loadLevel("../../res/Levels/Zinc.lvl", lvl);
-		loop.LoadLevel(lvl);
+		//KGLGE::Level* lvl = new KGLGE::Level;
+		//KGLGE::loadLevel("../../res/Levels/Zinc.lvl", lvl);
+		//loop.LoadLevel(lvl);
 		
 		loop.addLevelCreator();
 
@@ -27,16 +27,11 @@
 		loop.addGameObject(&d,KGLGE_FOREGROUND);
 		*/
 		KGLGE::TextRenderer txtRndr(font);
-		loop.addGameObject(&txtRndr,KGLGE_FOREGROUND);
-		float x = -0.9f;
-		for(int i = 0; i < 9; i++){
-			txtRndr.addText(x,0,0.1f,i);
-			x += 0.15f;
-		}
-		//txtRndr.addText(0,0,0.1f,2);
+		KGLGE::GameObjectLocation loc = loop.addGameObject(&txtRndr,KGLGE_FOREGROUND);
 		
+		loop.addKeyHandler(loc,GLFW_KEY_Q,true);
 		KGLGE::Square squr(-1,-1,2,2,0,1,0,1);
-		//loop.addGameObject(&squr,KGLGE_BACKGROUND);
+		loop.addGameObject(&squr,KGLGE_BACKGROUND);
 
 		loop.startLoop();
 		glfwTerminate();

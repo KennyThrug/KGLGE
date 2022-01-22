@@ -77,7 +77,7 @@ void KGLGE::GameLoop::removeGameObject(unsigned int layer,unsigned int index)
 }
 
 void KGLGE::GameLoop::addKeyHandler(unsigned int layer, unsigned int index, unsigned int key,bool pressOnce)
-{int
+{
 	allGameObjects->handlers.push_back({ key,layer,index,pressOnce });
 }
 

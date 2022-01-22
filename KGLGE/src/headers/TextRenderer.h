@@ -37,5 +37,8 @@ namespace KGLGE{
             std::vector<Triangle> tri;
             KGLGE::TextureAtlas* font;
             std::vector<KGLGE::Sprite*> letters;
+
+            int curLetter = 0;
+            float curLocation = -0.9f;
     };
 }

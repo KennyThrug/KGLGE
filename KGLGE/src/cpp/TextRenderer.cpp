@@ -38,7 +38,7 @@ KGLGE::Triangle* KGLGE::TextRenderer::getIndicies(unsigned int offset){
         for(int j = 0; j < numTriangles; j++){
             tri.push_back(triangle[j]);
         }
-        off += numTriangles;
+        off += letters[i]->getNumVertex();
     }
     return tri.data();
 }
@@ -66,5 +66,10 @@ unsigned int KGLGE::TextRenderer::getNumTriangles(){
     return numTri;
 }
 bool KGLGE::TextRenderer::respondToKey(unsigned int key){
-    return false;   
+    if(key == GLFW_KEY_Q){
+        addText(curLocation,0,0.1f,curLetter);
+        curLocation += 0.15f;
+        curLetter++;
+        shouldUpdate = true;
+    }
 }
