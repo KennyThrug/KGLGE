@@ -39,6 +39,7 @@
 			x = -0.9f;
 			y += 0.2f;
 		}
+		txtRndr.addText(-0.9f,0,0.1f,"HELLOWORLD");
 
 		loop.addKeyHandler(loc,GLFW_KEY_Q,true);
 		KGLGE::Square squr(-1,-1,2,2,0,1,0,1);

@@ -1,8 +1,9 @@
 #pragma once
 #include "Sprite.h"
 #include "Square.h"
+#include <string>
 #include "TextureAtlas.h"
-//#include "LetterValues.h"
+#include "LetterValues.h"
 namespace KGLGE{
     class TextRenderer : public KGLGE::GameObject{
         public:
@@ -20,6 +21,7 @@ namespace KGLGE{
              * @return Position the position of the next letter to be placed
              */
             Position addText(float x, float y, float fontSize, unsigned int letterCode);
+            Position addText(float x, float y, float fontSize, std::string str);
 
 			void update() override;
 			Vertex* getVertexes() override;

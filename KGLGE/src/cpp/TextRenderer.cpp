@@ -8,6 +8,21 @@ KGLGE::Position KGLGE::TextRenderer::addText(float x, float y, float fontSize, u
     shouldUpdate = true;
     return {x + (fontSize * 1.25f), y};
 }
+KGLGE::Position KGLGE::TextRenderer::addText(float x, float y, float fontSize, std::string str){
+    float letter_x = x;
+    float letter_y = y;
+    for(int i = 0; i < str.size();i++){
+        letter_x = addText(letter_x,letter_y,fontSize,convertCharToInt(str[i])).x;
+        if(letter_x >= allGameObjects->windowSize.max_x){
+            letter_x = x;
+            letter_y -= (fontSize * 1.5f);
+        }
+        else if(letter_x <= allGameObjects->windowSize.min_x){
+            letter_x = x;
+            letter_y -= (fontSize * 1.5f);
+        }
+    }
+}
 void KGLGE::TextRenderer::update(){
 
 }
