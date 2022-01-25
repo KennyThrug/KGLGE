@@ -24,6 +24,7 @@
                 "Square.cpp",
                 "TextureAtlas.cpp",
                 "TextRenderer.cpp",
+                "MultipleGameObjects.cpp",
 
                 "-lGL",
                 "-lGLU",
@@ -70,6 +71,7 @@
                 "../src/cpp/Square.cpp",
                 "../src/cpp/TextureAtlas.cpp",
                 "../src/cpp/TextRenderer.cpp",
+                "../src/cpp/MultipleGameObjcets.cpp",
 
                 "-lGL",
                 "-lGLU",
@@ -114,7 +116,8 @@
                 "../obj/Square.o",
                 "../obj/TextureAtlas.o",
                 "../obj/Window.o",
-                "../obj/TextRenderer.o"
+                "../obj/TextRenderer.o",
+                "../obj/MultipleGameObjects.o"
             ],
             "options": {
                 "cwd": "${fileDirname}/../../lib"

@@ -5,8 +5,7 @@ KGLGE::TextRenderer::TextRenderer(KGLGE::TextureAtlas* fontAtlas) : font(fontAtl
 KGLGE::Position KGLGE::TextRenderer::addText(float x, float y, float fontSize, unsigned int letterCode){
     if(letterCode != KGLGE_Space){
         KGLGE::Sprite* letter = new KGLGE::Sprite(font,x,y,fontSize,fontSize,letterCode,2);
-        letters.push_back(letter);
-        shouldUpdate = true;
+        addGameObject(letter);
     }
     
     return {x + (fontSize * 1.1f), y};
@@ -32,36 +31,6 @@ KGLGE::Position KGLGE::TextRenderer::addTextFromKeyCode(float x, float y, float 
 void KGLGE::TextRenderer::update(){
 
 }
-KGLGE::Vertex* KGLGE::TextRenderer::getVertexes(){
-    verticies.clear();
-    for(int i = 0; i < letters.size(); i++){
-        int numVertex = letters[i]->getNumVertex();
-        for(int j = 0; j < numVertex; j++){
-            verticies.push_back(letters[i]->getVertexes()[j]);
-        }
-    }
-    return verticies.data();
-}
-unsigned int KGLGE::TextRenderer::getNumVertex(){
-    unsigned int numVertex = 0;
-    for(int i = 0; i < letters.size(); i++){
-        numVertex += letters[i]->getNumVertex();
-    }
-    return numVertex;
-}
-KGLGE::Triangle* KGLGE::TextRenderer::getIndicies(unsigned int offset){
-    tri.clear();
-    unsigned int off = offset;
-    for(int i = 0; i < letters.size(); i++){
-        int numTriangles = letters[i]->getNumTriangles();
-        Triangle* triangle = letters[i]->getIndicies(off);
-        for(int j = 0; j < numTriangles; j++){
-            tri.push_back(triangle[j]);
-        }
-        off += letters[i]->getNumVertex();
-    }
-    return tri.data();
-}
 int KGLGE::TextRenderer::getGameObjectID(){
     return 0;
 }
@@ -77,13 +46,6 @@ int KGLGE::TextRenderer::getPropertySize(int propertyNum){
 }
 int KGLGE::TextRenderer::getNumProperties(){
     return 0;
-}
-unsigned int KGLGE::TextRenderer::getNumTriangles(){
-    unsigned int numTri = 0;
-    for(int i = 0; i < letters.size(); i++){
-        numTri += letters[i]->getNumTriangles();
-    }
-    return numTri;
 }
 bool KGLGE::TextRenderer::respondToKey(unsigned int key){
     return false;
