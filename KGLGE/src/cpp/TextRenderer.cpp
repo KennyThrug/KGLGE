@@ -3,25 +3,31 @@ KGLGE::TextRenderer::TextRenderer(KGLGE::TextureAtlas* fontAtlas) : font(fontAtl
 
 }
 KGLGE::Position KGLGE::TextRenderer::addText(float x, float y, float fontSize, unsigned int letterCode){
-    KGLGE::Sprite* letter = new KGLGE::Sprite(font,x,y,fontSize,fontSize,letterCode,2);
-    letters.push_back(letter);
-    shouldUpdate = true;
-    return {x + (fontSize * 1.25f), y};
+    if(letterCode != KGLGE_Space){
+        KGLGE::Sprite* letter = new KGLGE::Sprite(font,x,y,fontSize,fontSize,letterCode,2);
+        letters.push_back(letter);
+        shouldUpdate = true;
+    }
+    
+    return {x + (fontSize * 1.1f), y};
 }
 KGLGE::Position KGLGE::TextRenderer::addText(float x, float y, float fontSize, std::string str){
     float letter_x = x;
     float letter_y = y;
     for(int i = 0; i < str.size();i++){
         letter_x = addText(letter_x,letter_y,fontSize,convertCharToInt(str[i])).x;
-        if(letter_x >= allGameObjects->windowSize.max_x){
+        if(letter_x + fontSize >= allGameObjects->windowSize.max_x){
             letter_x = x;
             letter_y -= (fontSize * 1.5f);
         }
-        else if(letter_x <= allGameObjects->windowSize.min_x){
+        else if(letter_x + fontSize <= allGameObjects->windowSize.min_x){
             letter_x = x;
             letter_y -= (fontSize * 1.5f);
         }
     }
+}
+KGLGE::Position KGLGE::TextRenderer::addTextFromKeyCode(float x, float y, float fontSize, unsigned int keyCode, bool shift){
+    addText(x,y,fontSize,convertKeyToLetter(keyCode,shift));
 }
 void KGLGE::TextRenderer::update(){
 

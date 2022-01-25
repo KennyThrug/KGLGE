@@ -22,6 +22,7 @@ namespace KGLGE{
              */
             Position addText(float x, float y, float fontSize, unsigned int letterCode);
             Position addText(float x, float y, float fontSize, std::string str);
+            Position addTextFromKeyCode(float x, float y, float fontSize, unsigned int keyCode, bool shift);
 
 			void update() override;
 			Vertex* getVertexes() override;
