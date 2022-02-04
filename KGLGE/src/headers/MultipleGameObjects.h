@@ -1,3 +1,4 @@
+#pragma once
 #include "GameObject.h"
 namespace KGLGE{
     class MultipleGameObjects : public KGLGE::GameObject{

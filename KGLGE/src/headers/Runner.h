@@ -26,7 +26,7 @@
 		txtRndr.addText(-0.9f,0,0.1f,"ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz 0123456789 .,;:$!?&()@");
 
 		loop.addKeyHandler(loc,GLFW_KEY_Q,true);
-		KGLGE::Square squr(-1,-1,2,2,0,1,0,1);
+		KGLGE::Square squr(-1,-1,2,2,0,0,1,1);
 		loop.addGameObject(&squr,KGLGE_BACKGROUND);
 		loop.addGameObject(&txtRndr,KGLGE_FOREGROUND);
 

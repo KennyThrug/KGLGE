@@ -24,9 +24,10 @@ KGLGE::Position KGLGE::TextRenderer::addText(float x, float y, float fontSize, s
             letter_y -= (fontSize * 1.5f);
         }
     }
+    return {letter_x, letter_y};
 }
 KGLGE::Position KGLGE::TextRenderer::addTextFromKeyCode(float x, float y, float fontSize, unsigned int keyCode, bool shift){
-    addText(x,y,fontSize,convertKeyToLetter(keyCode,shift));
+    return addText(x,y,fontSize,convertKeyToLetter(keyCode,shift));
 }
 void KGLGE::TextRenderer::update(){
 
